@@ -8,7 +8,6 @@ from datetime import datetime
 from collections import defaultdict, deque
 
 SATELLITE_HOST = "127.0.0.1"
->>>>>>> main
 SATELLITE_PORT = 9001
 DISC_UDP_PORT  = 9002
 
