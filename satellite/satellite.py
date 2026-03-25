@@ -105,8 +105,7 @@ def ground_listener():
             threading.Thread(target=handle_ground, args=(conn, addr), daemon=True).start()
 
 def handle_ground(conn, addr):
-    ground_id = None; buffer = 
-    ""
+    ground_id = None; buffer = ""
     try:
         conn.settimeout(60)
         with conn:
@@ -122,3 +121,88 @@ def handle_ground(conn, addr):
                     t = msg.get("type","")
                     if t == "REGISTER":
                         ground_id = msg.get("ground_id", str(addr))
+                        with g_lock: ground_connections[ground_id] = {"sock": conn}
+                        log.info(f"✅ Ground registered: {ground_id}")
+                        conn.sendall((json.dumps({"type":"REGISTER_ACK","satellite_id":SATELLITE_ID,
+                            "ground_id":ground_id,"timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
+                    elif t == "COMMAND":
+                        target = msg.get("turbine_id")
+                        msg.update({"routed_via":SATELLITE_ID,"route_timestamp":datetime.utcnow().isoformat()+"Z"})
+                        payload = json.dumps(msg)
+                        queued = not link_up or channel_loss()
+                        if queued:
+                            command_queue[target].put(payload)
+                            log.warning(f"Command queued for {target} (link={'down' if not link_up else 'loss'})")
+                        else:
+                            with t_lock: tc = turbine_connections.get(target)
+                            if tc:
+                                try: channel_delay(); tc["sock"].sendall((payload+"\n").encode())
+                                except OSError: command_queue[target].put(payload); queued=True
+                            else: command_queue[target].put(payload); queued=True
+                        _route_ack(conn, msg, queued)
+                    elif t == "DISCOVER":
+                        with t_lock:
+                            known = [{"turbine_id":tid,"meta":info["meta"]} for tid,info in turbine_connections.items()]
+                        conn.sendall((json.dumps({"type":"DISCOVER_RESPONSE","satellite_id":SATELLITE_ID,
+                            "turbines":known,"link_up":link_up,"timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
+                    elif t == "PING":
+                        conn.sendall((json.dumps({"type":"PONG","satellite_id":SATELLITE_ID,
+                            "link_up":link_up,"timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
+    except Exception as e: log.info(f"Ground {ground_id or addr} disconnected: {e}")
+    finally:
+        if ground_id:
+            with g_lock: ground_connections.pop(ground_id, None)
+
+def _route_ack(conn, orig, queued):
+    try: conn.sendall((json.dumps({"type":"ROUTE_ACK","turbine_id":orig.get("turbine_id"),
+        "action":orig.get("action"),"queued":queued,"satellite":SATELLITE_ID,
+        "timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
+    except OSError: pass
+
+def relay_loop():
+    while True:
+        try: _broadcast_ground(relay_queue.get(timeout=1))
+        except queue.Empty: pass
+
+def _broadcast_ground(payload):
+    channel_delay()
+    with g_lock:
+        dead = []
+        for gid, info in ground_connections.items():
+            try: info["sock"].sendall((payload+"\n").encode())
+            except OSError: dead.append(gid)
+        for gid in dead: ground_connections.pop(gid, None)
+
+def udp_discovery():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
+        udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        udp.bind(("0.0.0.0", DISCOVERY_UDP_PORT))
+        log.info(f"  UDP discovery   → 0.0.0.0:{DISCOVERY_UDP_PORT}")
+        while True:
+            try:
+                data, addr = udp.recvfrom(512)
+                msg = json.loads(data.decode())
+                if msg.get("type") == "DISCOVER_UDP":
+                    udp.sendto(json.dumps({"type":"SATELLITE_INFO","satellite_id":SATELLITE_ID,
+                        "turbine_port":TURBINE_LISTEN_PORT,"ground_port":GROUND_LISTEN_PORT,
+                        "link_up":link_up,"timestamp":datetime.utcnow().isoformat()+"Z"}).encode(), addr)
+            except Exception: pass
+
+def status_printer():
+    while True:
+        time.sleep(15)
+        with t_lock: tc = len(turbine_connections)
+        with g_lock: gc = len(ground_connections)
+        log.info(f"Status | link={'UP  ' if link_up else 'DOWN'} | turbines={tc} | ground={gc} | relay_q={relay_queue.qsize()}")
+
+def main():
+    log.info("="*55 + f"\n  🛰️  SATELLITE  –  {SATELLITE_ID}\n" + "="*55)
+    for target in [turbine_listener, ground_listener, udp_discovery, relay_loop, visibility_manager, status_printer]:
+        threading.Thread(target=target, daemon=True).start()
+    log.info("All services running. Ctrl+C to stop.\n")
+    try:
+        while True: time.sleep(1)
+    except KeyboardInterrupt: log.info("Satellite shutting down.")
+
+if __name__ == "__main__":
+    main()
