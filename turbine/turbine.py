@@ -17,7 +17,7 @@ Each turbine instance gets its own 4 sensor ports starting from base_port:
 import socket, threading, time, random, json, logging, sys
 from datetime import datetime
 
-# ── !! FILL THIS IN !! ────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────
 SATELLITE_HOST = "127.0.0.1"   # ← replace with Laptop B's IP e.g. "192.168.1.11"
 SATELLITE_PORT = 9000
 # ─────────────────────────────────────────────────────────────────────────────
