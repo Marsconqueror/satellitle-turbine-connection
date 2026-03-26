@@ -1,6 +1,6 @@
 """
 CSU33D03 - Main Project 2025-26
-LEO SATELLITE RELAY  –  Device B  (single-machine mode: all on localhost)
+LEO SATELLITE RELAY  -  Device B  (single-machine mode: all on localhost)
 """
 
 import socket, threading, time, random, json, logging, sys, queue
@@ -30,24 +30,22 @@ relay_queue   = queue.Queue(maxsize=300)
 command_queue = defaultdict(lambda: queue.Queue(maxsize=100))
 link_up = True
 
-# ── Channel helpers ───────────────────────────────────────────────────────────
 def channel_delay(): time.sleep((PROP_DELAY_MS/1000.0) + abs(random.gauss(0, 0.003)))
 def channel_loss():  return random.random() < PACKET_LOSS_RATE
 
-# ── Visibility manager ────────────────────────────────────────────────────────
 def visibility_manager():
     global link_up
     cycle = VISIBILITY_CYCLE_S / TIME_SCALE; window = VISIBILITY_WINDOW_S / TIME_SCALE
     while True:
-        link_up = True;  log.info(f"🛰️  LINK UP   ({window:.0f}s window at ×{TIME_SCALE})"); time.sleep(window)
-        link_up = False; log.info(f"🛰️  LINK DOWN ({cycle-window:.0f}s blackout)");           time.sleep(cycle - window)
+        link_up = True;  log.info(f"LINK UP   ({window:.0f}s window at x{TIME_SCALE})"); time.sleep(window)
+        link_up = False; log.info(f"LINK DOWN ({cycle-window:.0f}s blackout)");           time.sleep(cycle - window)
 
-# ── Turbine handler ───────────────────────────────────────────────────────────
+
 def turbine_listener():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", TURBINE_LISTEN_PORT)); srv.listen(20)
-        log.info(f"  Turbine uplink  → 0.0.0.0:{TURBINE_LISTEN_PORT}")
+        log.info(f"  Turbine uplink  -> 0.0.0.0:{TURBINE_LISTEN_PORT}")
         while True:
             conn, addr = srv.accept()
             threading.Thread(target=handle_turbine, args=(conn, addr), daemon=True).start()
@@ -70,7 +68,7 @@ def handle_turbine(conn, addr):
                     if t == "REGISTER":
                         turbine_id = msg.get("turbine_id", str(addr))
                         with t_lock: turbine_connections[turbine_id] = {"sock": conn, "meta": msg}
-                        log.info(f"✅ Turbine registered: {turbine_id}")
+                        log.info(f"Turbine registered: {turbine_id}")
                         conn.sendall((json.dumps({"type":"REGISTER_ACK","satellite_id":SATELLITE_ID,
                             "turbine_id":turbine_id,"timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
                     elif t == "TELEMETRY":
@@ -94,12 +92,11 @@ def handle_turbine(conn, addr):
         if turbine_id:
             with t_lock: turbine_connections.pop(turbine_id, None)
 
-# ── Ground handler ────────────────────────────────────────────────────────────
 def ground_listener():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", GROUND_LISTEN_PORT)); srv.listen(20)
-        log.info(f"  Ground downlink → 0.0.0.0:{GROUND_LISTEN_PORT}")
+        log.info(f"  Ground downlink -> 0.0.0.0:{GROUND_LISTEN_PORT}")
         while True:
             conn, addr = srv.accept()
             threading.Thread(target=handle_ground, args=(conn, addr), daemon=True).start()
@@ -122,7 +119,7 @@ def handle_ground(conn, addr):
                     if t == "REGISTER":
                         ground_id = msg.get("ground_id", str(addr))
                         with g_lock: ground_connections[ground_id] = {"sock": conn}
-                        log.info(f"✅ Ground registered: {ground_id}")
+                        log.info(f"Ground registered: {ground_id}")
                         conn.sendall((json.dumps({"type":"REGISTER_ACK","satellite_id":SATELLITE_ID,
                             "ground_id":ground_id,"timestamp":datetime.utcnow().isoformat()+"Z"})+"\n").encode())
                     elif t == "COMMAND":
@@ -177,7 +174,7 @@ def udp_discovery():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
         udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         udp.bind(("0.0.0.0", DISCOVERY_UDP_PORT))
-        log.info(f"  UDP discovery   → 0.0.0.0:{DISCOVERY_UDP_PORT}")
+        log.info(f"  UDP discovery   -> 0.0.0.0:{DISCOVERY_UDP_PORT}")
         while True:
             try:
                 data, addr = udp.recvfrom(512)
@@ -196,7 +193,7 @@ def status_printer():
         log.info(f"Status | link={'UP  ' if link_up else 'DOWN'} | turbines={tc} | ground={gc} | relay_q={relay_queue.qsize()}")
 
 def main():
-    log.info("="*55 + f"\n  🛰️  SATELLITE  –  {SATELLITE_ID}\n" + "="*55)
+    log.info("="*55 + f"\n  SATELLITE  -  {SATELLITE_ID}\n" + "="*55)
     for target in [turbine_listener, ground_listener, udp_discovery, relay_loop, visibility_manager, status_printer]:
         threading.Thread(target=target, daemon=True).start()
     log.info("All services running. Ctrl+C to stop.\n")
