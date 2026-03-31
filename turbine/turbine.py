@@ -97,6 +97,8 @@ def discovery_broadcaster():
 def discovery_listener():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    if hasattr(socket, "SO_REUSEPORT"):
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
     sock.bind(("", MESH_MCAST_PORT))
     mreq = struct.pack("4sL", socket.inet_aton(MESH_MCAST_GROUP), socket.INADDR_ANY)
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
@@ -455,7 +457,7 @@ def main():
     threading.Thread(target=peer_server,           daemon=True).start()
     threading.Thread(target=actuator_loop,         daemon=True).start()
 
-    time.sleep(0.5)
+    time.sleep(6)
     mesh_coordinator()
 
     if is_leader:
