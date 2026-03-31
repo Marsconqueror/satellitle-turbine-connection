@@ -13,7 +13,7 @@ from datetime import datetime
 from collections import defaultdict, deque
 
 SATELLITE_HOST = "127.0.0.1"   # replace with the satellite laptop IP
-SATELLITE_PORT = 9001
+SATELLITE_PORT = 9001           #satellite port 
 DISC_UDP_PORT  = 9002
 
 GROUND_ID       = "GROUND-CTRL-01"
