@@ -1,0 +1,3002 @@
+[
+  {
+    "wind_speed": 11.75,
+    "power_output": 1837.9,
+    "rotor_rpm": 8.6,
+    "temperature": 42.9,
+    "gearbox_temp": 45.7,
+    "vibration": 0.9,
+    "hydraulic_pressure": 170.3,
+    "nacelle_humidity": 53.0
+  },
+  {
+    "wind_speed": 11.96,
+    "power_output": 1928.2,
+    "rotor_rpm": 8.74,
+    "temperature": 44.4,
+    "gearbox_temp": 46.8,
+    "vibration": 1.04,
+    "hydraulic_pressure": 168.0,
+    "nacelle_humidity": 52.5
+  },
+  {
+    "wind_speed": 12.53,
+    "power_output": 1922.8,
+    "rotor_rpm": 8.86,
+    "temperature": 46.0,
+    "gearbox_temp": 47.7,
+    "vibration": 1.25,
+    "hydraulic_pressure": 165.8,
+    "nacelle_humidity": 52.7
+  },
+  {
+    "wind_speed": 12.7,
+    "power_output": 1986.6,
+    "rotor_rpm": 9.19,
+    "temperature": 47.3,
+    "gearbox_temp": 48.2,
+    "vibration": 1.29,
+    "hydraulic_pressure": 163.7,
+    "nacelle_humidity": 52.7
+  },
+  {
+    "wind_speed": 12.69,
+    "power_output": 1939.9,
+    "rotor_rpm": 9.39,
+    "temperature": 47.5,
+    "gearbox_temp": 48.6,
+    "vibration": 1.46,
+    "hydraulic_pressure": 162.4,
+    "nacelle_humidity": 52.5
+  },
+  {
+    "wind_speed": 12.22,
+    "power_output": 1970.9,
+    "rotor_rpm": 9.41,
+    "temperature": 48.7,
+    "gearbox_temp": 49.4,
+    "vibration": 1.47,
+    "hydraulic_pressure": 159.1,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 11.65,
+    "power_output": 1913.0,
+    "rotor_rpm": 9.15,
+    "temperature": 48.5,
+    "gearbox_temp": 49.9,
+    "vibration": 1.51,
+    "hydraulic_pressure": 157.3,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 12.11,
+    "power_output": 1953.9,
+    "rotor_rpm": 9.16,
+    "temperature": 49.3,
+    "gearbox_temp": 50.0,
+    "vibration": 1.61,
+    "hydraulic_pressure": 155.4,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 11.72,
+    "power_output": 1894.9,
+    "rotor_rpm": 9.15,
+    "temperature": 50.2,
+    "gearbox_temp": 50.7,
+    "vibration": 1.69,
+    "hydraulic_pressure": 154.9,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 12.22,
+    "power_output": 1924.3,
+    "rotor_rpm": 9.07,
+    "temperature": 50.9,
+    "gearbox_temp": 50.8,
+    "vibration": 1.67,
+    "hydraulic_pressure": 154.8,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 11.95,
+    "power_output": 1968.3,
+    "rotor_rpm": 9.1,
+    "temperature": 51.5,
+    "gearbox_temp": 51.2,
+    "vibration": 1.78,
+    "hydraulic_pressure": 152.7,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 11.66,
+    "power_output": 1903.2,
+    "rotor_rpm": 8.89,
+    "temperature": 51.2,
+    "gearbox_temp": 51.1,
+    "vibration": 1.73,
+    "hydraulic_pressure": 152.0,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 11.4,
+    "power_output": 1815.5,
+    "rotor_rpm": 8.8,
+    "temperature": 50.9,
+    "gearbox_temp": 51.1,
+    "vibration": 1.64,
+    "hydraulic_pressure": 151.8,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 11.68,
+    "power_output": 1822.0,
+    "rotor_rpm": 8.68,
+    "temperature": 50.0,
+    "gearbox_temp": 51.4,
+    "vibration": 1.57,
+    "hydraulic_pressure": 151.4,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.23,
+    "power_output": 1823.0,
+    "rotor_rpm": 8.75,
+    "temperature": 49.9,
+    "gearbox_temp": 51.4,
+    "vibration": 1.51,
+    "hydraulic_pressure": 151.6,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 12.34,
+    "power_output": 1882.9,
+    "rotor_rpm": 9.01,
+    "temperature": 50.3,
+    "gearbox_temp": 51.6,
+    "vibration": 1.66,
+    "hydraulic_pressure": 150.4,
+    "nacelle_humidity": 50.6
+  },
+  {
+    "wind_speed": 12.62,
+    "power_output": 1872.1,
+    "rotor_rpm": 8.79,
+    "temperature": 50.2,
+    "gearbox_temp": 51.5,
+    "vibration": 1.62,
+    "hydraulic_pressure": 150.5,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 12.82,
+    "power_output": 1873.4,
+    "rotor_rpm": 9.18,
+    "temperature": 50.0,
+    "gearbox_temp": 51.4,
+    "vibration": 1.66,
+    "hydraulic_pressure": 149.7,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 13.28,
+    "power_output": 1933.5,
+    "rotor_rpm": 9.15,
+    "temperature": 49.6,
+    "gearbox_temp": 51.6,
+    "vibration": 1.66,
+    "hydraulic_pressure": 150.1,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 12.76,
+    "power_output": 1930.9,
+    "rotor_rpm": 9.33,
+    "temperature": 49.2,
+    "gearbox_temp": 51.9,
+    "vibration": 1.64,
+    "hydraulic_pressure": 150.1,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.53,
+    "power_output": 1902.3,
+    "rotor_rpm": 9.42,
+    "temperature": 49.7,
+    "gearbox_temp": 51.8,
+    "vibration": 1.58,
+    "hydraulic_pressure": 149.4,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 11.98,
+    "power_output": 1910.4,
+    "rotor_rpm": 9.14,
+    "temperature": 49.2,
+    "gearbox_temp": 51.8,
+    "vibration": 1.54,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 11.86,
+    "power_output": 1941.4,
+    "rotor_rpm": 8.84,
+    "temperature": 50.1,
+    "gearbox_temp": 51.9,
+    "vibration": 1.58,
+    "hydraulic_pressure": 148.6,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.05,
+    "power_output": 1917.9,
+    "rotor_rpm": 8.95,
+    "temperature": 50.4,
+    "gearbox_temp": 52.2,
+    "vibration": 1.52,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 12.33,
+    "power_output": 1954.2,
+    "rotor_rpm": 8.98,
+    "temperature": 50.2,
+    "gearbox_temp": 52.5,
+    "vibration": 1.53,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 11.77,
+    "power_output": 1950.1,
+    "rotor_rpm": 8.82,
+    "temperature": 50.1,
+    "gearbox_temp": 52.8,
+    "vibration": 1.67,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 11.5,
+    "power_output": 1836.5,
+    "rotor_rpm": 8.86,
+    "temperature": 49.5,
+    "gearbox_temp": 52.8,
+    "vibration": 1.63,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 11.96,
+    "power_output": 1870.9,
+    "rotor_rpm": 8.72,
+    "temperature": 49.9,
+    "gearbox_temp": 52.7,
+    "vibration": 1.57,
+    "hydraulic_pressure": 147.0,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 11.37,
+    "power_output": 1754.0,
+    "rotor_rpm": 8.68,
+    "temperature": 49.8,
+    "gearbox_temp": 52.2,
+    "vibration": 1.56,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 10.84,
+    "power_output": 1555.9,
+    "rotor_rpm": 8.52,
+    "temperature": 50.0,
+    "gearbox_temp": 52.0,
+    "vibration": 1.58,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 10.53,
+    "power_output": 1389.6,
+    "rotor_rpm": 8.14,
+    "temperature": 49.3,
+    "gearbox_temp": 52.0,
+    "vibration": 1.45,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 10.2,
+    "power_output": 1282.6,
+    "rotor_rpm": 7.7,
+    "temperature": 48.4,
+    "gearbox_temp": 51.4,
+    "vibration": 1.43,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 10.42,
+    "power_output": 1202.2,
+    "rotor_rpm": 7.52,
+    "temperature": 48.0,
+    "gearbox_temp": 51.2,
+    "vibration": 1.39,
+    "hydraulic_pressure": 149.7,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 10.88,
+    "power_output": 1286.3,
+    "rotor_rpm": 7.7,
+    "temperature": 47.7,
+    "gearbox_temp": 51.1,
+    "vibration": 1.34,
+    "hydraulic_pressure": 150.1,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 10.31,
+    "power_output": 1238.2,
+    "rotor_rpm": 7.77,
+    "temperature": 47.6,
+    "gearbox_temp": 51.0,
+    "vibration": 1.24,
+    "hydraulic_pressure": 150.6,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 9.81,
+    "power_output": 1057.0,
+    "rotor_rpm": 7.29,
+    "temperature": 46.7,
+    "gearbox_temp": 50.8,
+    "vibration": 1.33,
+    "hydraulic_pressure": 151.4,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 9.98,
+    "power_output": 1020.9,
+    "rotor_rpm": 7.37,
+    "temperature": 46.7,
+    "gearbox_temp": 50.8,
+    "vibration": 1.29,
+    "hydraulic_pressure": 152.0,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 9.94,
+    "power_output": 1004.2,
+    "rotor_rpm": 7.28,
+    "temperature": 45.9,
+    "gearbox_temp": 50.5,
+    "vibration": 1.23,
+    "hydraulic_pressure": 153.0,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 10.02,
+    "power_output": 974.8,
+    "rotor_rpm": 7.37,
+    "temperature": 45.4,
+    "gearbox_temp": 50.1,
+    "vibration": 1.32,
+    "hydraulic_pressure": 152.9,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 9.85,
+    "power_output": 954.8,
+    "rotor_rpm": 7.37,
+    "temperature": 45.2,
+    "gearbox_temp": 49.8,
+    "vibration": 1.41,
+    "hydraulic_pressure": 152.7,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 9.71,
+    "power_output": 940.4,
+    "rotor_rpm": 7.35,
+    "temperature": 44.7,
+    "gearbox_temp": 49.5,
+    "vibration": 1.29,
+    "hydraulic_pressure": 153.0,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 9.13,
+    "power_output": 791.2,
+    "rotor_rpm": 7.07,
+    "temperature": 44.8,
+    "gearbox_temp": 49.4,
+    "vibration": 1.22,
+    "hydraulic_pressure": 153.1,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 8.88,
+    "power_output": 693.1,
+    "rotor_rpm": 6.71,
+    "temperature": 44.9,
+    "gearbox_temp": 49.4,
+    "vibration": 1.27,
+    "hydraulic_pressure": 154.3,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 9.03,
+    "power_output": 635.0,
+    "rotor_rpm": 6.88,
+    "temperature": 44.8,
+    "gearbox_temp": 49.1,
+    "vibration": 1.27,
+    "hydraulic_pressure": 155.2,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 9.45,
+    "power_output": 695.9,
+    "rotor_rpm": 6.93,
+    "temperature": 44.4,
+    "gearbox_temp": 48.5,
+    "vibration": 1.13,
+    "hydraulic_pressure": 156.7,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 9.63,
+    "power_output": 765.7,
+    "rotor_rpm": 6.7,
+    "temperature": 43.5,
+    "gearbox_temp": 48.1,
+    "vibration": 1.01,
+    "hydraulic_pressure": 157.8,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 10.23,
+    "power_output": 878.2,
+    "rotor_rpm": 6.91,
+    "temperature": 43.3,
+    "gearbox_temp": 47.6,
+    "vibration": 0.98,
+    "hydraulic_pressure": 157.1,
+    "nacelle_humidity": 51.9
+  },
+  {
+    "wind_speed": 10.08,
+    "power_output": 898.2,
+    "rotor_rpm": 7.14,
+    "temperature": 43.3,
+    "gearbox_temp": 47.5,
+    "vibration": 1.11,
+    "hydraulic_pressure": 157.6,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 9.7,
+    "power_output": 908.2,
+    "rotor_rpm": 6.96,
+    "temperature": 43.2,
+    "gearbox_temp": 47.4,
+    "vibration": 1.08,
+    "hydraulic_pressure": 156.4,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 9.58,
+    "power_output": 888.1,
+    "rotor_rpm": 7.08,
+    "temperature": 43.8,
+    "gearbox_temp": 47.0,
+    "vibration": 1.0,
+    "hydraulic_pressure": 157.2,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 9.33,
+    "power_output": 848.3,
+    "rotor_rpm": 7.11,
+    "temperature": 43.4,
+    "gearbox_temp": 46.8,
+    "vibration": 1.05,
+    "hydraulic_pressure": 157.1,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 8.74,
+    "power_output": 729.8,
+    "rotor_rpm": 6.66,
+    "temperature": 43.2,
+    "gearbox_temp": 46.7,
+    "vibration": 1.15,
+    "hydraulic_pressure": 157.2,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 9.03,
+    "power_output": 684.1,
+    "rotor_rpm": 6.42,
+    "temperature": 42.9,
+    "gearbox_temp": 46.7,
+    "vibration": 1.03,
+    "hydraulic_pressure": 158.5,
+    "nacelle_humidity": 50.9
+  },
+  {
+    "wind_speed": 8.62,
+    "power_output": 613.0,
+    "rotor_rpm": 6.52,
+    "temperature": 42.9,
+    "gearbox_temp": 46.7,
+    "vibration": 1.05,
+    "hydraulic_pressure": 157.9,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 8.44,
+    "power_output": 522.4,
+    "rotor_rpm": 6.41,
+    "temperature": 42.2,
+    "gearbox_temp": 46.2,
+    "vibration": 0.92,
+    "hydraulic_pressure": 157.3,
+    "nacelle_humidity": 50.9
+  },
+  {
+    "wind_speed": 8.91,
+    "power_output": 513.6,
+    "rotor_rpm": 6.23,
+    "temperature": 41.4,
+    "gearbox_temp": 45.8,
+    "vibration": 0.92,
+    "hydraulic_pressure": 158.0,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 9.22,
+    "power_output": 571.8,
+    "rotor_rpm": 6.54,
+    "temperature": 41.1,
+    "gearbox_temp": 46.2,
+    "vibration": 0.96,
+    "hydraulic_pressure": 158.8,
+    "nacelle_humidity": 50.8
+  },
+  {
+    "wind_speed": 9.77,
+    "power_output": 679.6,
+    "rotor_rpm": 6.79,
+    "temperature": 41.7,
+    "gearbox_temp": 46.4,
+    "vibration": 0.89,
+    "hydraulic_pressure": 158.6,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 9.33,
+    "power_output": 699.8,
+    "rotor_rpm": 6.79,
+    "temperature": 42.1,
+    "gearbox_temp": 46.3,
+    "vibration": 0.9,
+    "hydraulic_pressure": 158.7,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 8.9,
+    "power_output": 674.2,
+    "rotor_rpm": 6.56,
+    "temperature": 42.8,
+    "gearbox_temp": 46.5,
+    "vibration": 0.99,
+    "hydraulic_pressure": 159.1,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 9.33,
+    "power_output": 666.8,
+    "rotor_rpm": 6.75,
+    "temperature": 42.3,
+    "gearbox_temp": 46.1,
+    "vibration": 0.94,
+    "hydraulic_pressure": 158.2,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 9.83,
+    "power_output": 778.0,
+    "rotor_rpm": 7.0,
+    "temperature": 42.9,
+    "gearbox_temp": 46.5,
+    "vibration": 0.88,
+    "hydraulic_pressure": 157.9,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 9.82,
+    "power_output": 784.8,
+    "rotor_rpm": 6.92,
+    "temperature": 43.1,
+    "gearbox_temp": 46.6,
+    "vibration": 0.99,
+    "hydraulic_pressure": 158.7,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 9.91,
+    "power_output": 801.0,
+    "rotor_rpm": 6.86,
+    "temperature": 43.5,
+    "gearbox_temp": 46.5,
+    "vibration": 0.91,
+    "hydraulic_pressure": 157.5,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 10.47,
+    "power_output": 962.7,
+    "rotor_rpm": 7.14,
+    "temperature": 43.6,
+    "gearbox_temp": 47.0,
+    "vibration": 1.0,
+    "hydraulic_pressure": 156.4,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 10.72,
+    "power_output": 1091.8,
+    "rotor_rpm": 7.33,
+    "temperature": 43.9,
+    "gearbox_temp": 46.8,
+    "vibration": 1.12,
+    "hydraulic_pressure": 156.1,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 10.8,
+    "power_output": 1139.0,
+    "rotor_rpm": 7.71,
+    "temperature": 43.8,
+    "gearbox_temp": 46.8,
+    "vibration": 1.1,
+    "hydraulic_pressure": 155.8,
+    "nacelle_humidity": 50.9
+  },
+  {
+    "wind_speed": 11.18,
+    "power_output": 1292.4,
+    "rotor_rpm": 7.65,
+    "temperature": 44.2,
+    "gearbox_temp": 47.3,
+    "vibration": 1.08,
+    "hydraulic_pressure": 155.5,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 11.51,
+    "power_output": 1443.3,
+    "rotor_rpm": 7.8,
+    "temperature": 44.2,
+    "gearbox_temp": 47.9,
+    "vibration": 1.19,
+    "hydraulic_pressure": 155.5,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 11.86,
+    "power_output": 1609.5,
+    "rotor_rpm": 8.16,
+    "temperature": 45.2,
+    "gearbox_temp": 48.3,
+    "vibration": 1.32,
+    "hydraulic_pressure": 155.1,
+    "nacelle_humidity": 51.9
+  },
+  {
+    "wind_speed": 12.04,
+    "power_output": 1711.6,
+    "rotor_rpm": 8.23,
+    "temperature": 45.8,
+    "gearbox_temp": 48.4,
+    "vibration": 1.27,
+    "hydraulic_pressure": 154.6,
+    "nacelle_humidity": 52.3
+  },
+  {
+    "wind_speed": 12.18,
+    "power_output": 1805.4,
+    "rotor_rpm": 8.56,
+    "temperature": 46.3,
+    "gearbox_temp": 49.1,
+    "vibration": 1.29,
+    "hydraulic_pressure": 152.8,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 12.67,
+    "power_output": 1886.5,
+    "rotor_rpm": 8.96,
+    "temperature": 46.5,
+    "gearbox_temp": 49.5,
+    "vibration": 1.41,
+    "hydraulic_pressure": 152.3,
+    "nacelle_humidity": 52.2
+  },
+  {
+    "wind_speed": 12.95,
+    "power_output": 1865.2,
+    "rotor_rpm": 9.32,
+    "temperature": 47.7,
+    "gearbox_temp": 50.1,
+    "vibration": 1.49,
+    "hydraulic_pressure": 151.9,
+    "nacelle_humidity": 52.4
+  },
+  {
+    "wind_speed": 13.08,
+    "power_output": 1867.7,
+    "rotor_rpm": 9.52,
+    "temperature": 48.7,
+    "gearbox_temp": 50.4,
+    "vibration": 1.45,
+    "hydraulic_pressure": 151.7,
+    "nacelle_humidity": 52.6
+  },
+  {
+    "wind_speed": 13.64,
+    "power_output": 1871.5,
+    "rotor_rpm": 9.79,
+    "temperature": 49.7,
+    "gearbox_temp": 50.9,
+    "vibration": 1.51,
+    "hydraulic_pressure": 150.9,
+    "nacelle_humidity": 52.9
+  },
+  {
+    "wind_speed": 13.49,
+    "power_output": 1905.6,
+    "rotor_rpm": 9.71,
+    "temperature": 49.8,
+    "gearbox_temp": 51.4,
+    "vibration": 1.65,
+    "hydraulic_pressure": 151.1,
+    "nacelle_humidity": 52.5
+  },
+  {
+    "wind_speed": 12.96,
+    "power_output": 1954.1,
+    "rotor_rpm": 9.51,
+    "temperature": 49.8,
+    "gearbox_temp": 51.9,
+    "vibration": 1.68,
+    "hydraulic_pressure": 151.3,
+    "nacelle_humidity": 52.6
+  },
+  {
+    "wind_speed": 13.41,
+    "power_output": 1913.2,
+    "rotor_rpm": 9.43,
+    "temperature": 50.5,
+    "gearbox_temp": 52.0,
+    "vibration": 1.66,
+    "hydraulic_pressure": 151.7,
+    "nacelle_humidity": 52.2
+  },
+  {
+    "wind_speed": 13.23,
+    "power_output": 1886.0,
+    "rotor_rpm": 9.3,
+    "temperature": 50.4,
+    "gearbox_temp": 51.7,
+    "vibration": 1.76,
+    "hydraulic_pressure": 150.9,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 12.97,
+    "power_output": 1839.9,
+    "rotor_rpm": 9.16,
+    "temperature": 50.9,
+    "gearbox_temp": 51.8,
+    "vibration": 1.78,
+    "hydraulic_pressure": 149.9,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 12.55,
+    "power_output": 1926.8,
+    "rotor_rpm": 8.95,
+    "temperature": 50.6,
+    "gearbox_temp": 51.9,
+    "vibration": 1.67,
+    "hydraulic_pressure": 150.4,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.43,
+    "power_output": 1923.7,
+    "rotor_rpm": 8.71,
+    "temperature": 50.6,
+    "gearbox_temp": 51.7,
+    "vibration": 1.77,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 12.58,
+    "power_output": 1896.3,
+    "rotor_rpm": 8.89,
+    "temperature": 50.4,
+    "gearbox_temp": 51.8,
+    "vibration": 1.78,
+    "hydraulic_pressure": 149.7,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.92,
+    "power_output": 1898.0,
+    "rotor_rpm": 9.05,
+    "temperature": 50.2,
+    "gearbox_temp": 52.2,
+    "vibration": 1.7,
+    "hydraulic_pressure": 150.0,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.47,
+    "power_output": 1922.9,
+    "rotor_rpm": 9.19,
+    "temperature": 49.9,
+    "gearbox_temp": 52.1,
+    "vibration": 1.69,
+    "hydraulic_pressure": 149.9,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 12.51,
+    "power_output": 1972.7,
+    "rotor_rpm": 8.91,
+    "temperature": 50.7,
+    "gearbox_temp": 52.0,
+    "vibration": 1.65,
+    "hydraulic_pressure": 149.9,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 12.76,
+    "power_output": 1886.8,
+    "rotor_rpm": 9.09,
+    "temperature": 51.0,
+    "gearbox_temp": 52.0,
+    "vibration": 1.58,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 13.07,
+    "power_output": 1939.5,
+    "rotor_rpm": 9.25,
+    "temperature": 51.3,
+    "gearbox_temp": 52.2,
+    "vibration": 1.68,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 13.4,
+    "power_output": 1919.6,
+    "rotor_rpm": 9.24,
+    "temperature": 51.2,
+    "gearbox_temp": 52.5,
+    "vibration": 1.79,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 13.14,
+    "power_output": 1926.0,
+    "rotor_rpm": 9.42,
+    "temperature": 51.2,
+    "gearbox_temp": 52.2,
+    "vibration": 1.68,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 12.88,
+    "power_output": 1884.5,
+    "rotor_rpm": 9.29,
+    "temperature": 50.6,
+    "gearbox_temp": 52.2,
+    "vibration": 1.64,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 12.34,
+    "power_output": 1881.6,
+    "rotor_rpm": 9.31,
+    "temperature": 50.7,
+    "gearbox_temp": 52.4,
+    "vibration": 1.71,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.14,
+    "power_output": 1923.0,
+    "rotor_rpm": 9.35,
+    "temperature": 51.1,
+    "gearbox_temp": 52.5,
+    "vibration": 1.82,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.59,
+    "power_output": 1904.3,
+    "rotor_rpm": 9.01,
+    "temperature": 50.9,
+    "gearbox_temp": 52.8,
+    "vibration": 1.69,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 12.04,
+    "power_output": 1922.6,
+    "rotor_rpm": 8.8,
+    "temperature": 50.5,
+    "gearbox_temp": 52.7,
+    "vibration": 1.58,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.0,
+    "power_output": 1967.8,
+    "rotor_rpm": 8.84,
+    "temperature": 50.4,
+    "gearbox_temp": 52.7,
+    "vibration": 1.68,
+    "hydraulic_pressure": 149.5,
+    "nacelle_humidity": 51.2
+  },
+  {
+    "wind_speed": 12.34,
+    "power_output": 1956.8,
+    "rotor_rpm": 8.71,
+    "temperature": 50.6,
+    "gearbox_temp": 52.4,
+    "vibration": 1.68,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 11.99,
+    "power_output": 1993.6,
+    "rotor_rpm": 8.86,
+    "temperature": 50.9,
+    "gearbox_temp": 52.2,
+    "vibration": 1.62,
+    "hydraulic_pressure": 149.5,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 12.48,
+    "power_output": 1955.2,
+    "rotor_rpm": 8.96,
+    "temperature": 50.2,
+    "gearbox_temp": 51.9,
+    "vibration": 1.51,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 12.86,
+    "power_output": 1908.1,
+    "rotor_rpm": 9.03,
+    "temperature": 50.6,
+    "gearbox_temp": 51.6,
+    "vibration": 1.46,
+    "hydraulic_pressure": 148.5,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 12.88,
+    "power_output": 1909.2,
+    "rotor_rpm": 9.18,
+    "temperature": 49.9,
+    "gearbox_temp": 51.4,
+    "vibration": 1.48,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 12.94,
+    "power_output": 1869.2,
+    "rotor_rpm": 9.0,
+    "temperature": 50.6,
+    "gearbox_temp": 51.9,
+    "vibration": 1.61,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 12.34,
+    "power_output": 1911.2,
+    "rotor_rpm": 8.84,
+    "temperature": 50.9,
+    "gearbox_temp": 51.8,
+    "vibration": 1.73,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 12.64,
+    "power_output": 1855.5,
+    "rotor_rpm": 9.11,
+    "temperature": 50.8,
+    "gearbox_temp": 51.6,
+    "vibration": 1.8,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 12.98,
+    "power_output": 1866.3,
+    "rotor_rpm": 9.12,
+    "temperature": 50.0,
+    "gearbox_temp": 51.7,
+    "vibration": 1.78,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 50.4
+  },
+  {
+    "wind_speed": 13.09,
+    "power_output": 1914.1,
+    "rotor_rpm": 9.14,
+    "temperature": 50.0,
+    "gearbox_temp": 51.6,
+    "vibration": 1.84,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 50.2
+  },
+  {
+    "wind_speed": 12.88,
+    "power_output": 1918.7,
+    "rotor_rpm": 8.96,
+    "temperature": 50.2,
+    "gearbox_temp": 51.4,
+    "vibration": 1.8,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 50.2
+  },
+  {
+    "wind_speed": 13.04,
+    "power_output": 1883.2,
+    "rotor_rpm": 9.24,
+    "temperature": 49.5,
+    "gearbox_temp": 51.8,
+    "vibration": 1.86,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 50.0
+  },
+  {
+    "wind_speed": 13.38,
+    "power_output": 1893.9,
+    "rotor_rpm": 9.35,
+    "temperature": 49.9,
+    "gearbox_temp": 51.7,
+    "vibration": 1.91,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 50.0
+  },
+  {
+    "wind_speed": 13.54,
+    "power_output": 1901.6,
+    "rotor_rpm": 9.47,
+    "temperature": 50.7,
+    "gearbox_temp": 51.9,
+    "vibration": 1.81,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 50.3
+  },
+  {
+    "wind_speed": 14.03,
+    "power_output": 1952.9,
+    "rotor_rpm": 9.45,
+    "temperature": 50.9,
+    "gearbox_temp": 51.9,
+    "vibration": 1.67,
+    "hydraulic_pressure": 148.6,
+    "nacelle_humidity": 50.3
+  },
+  {
+    "wind_speed": 13.76,
+    "power_output": 1943.3,
+    "rotor_rpm": 9.53,
+    "temperature": 51.3,
+    "gearbox_temp": 52.1,
+    "vibration": 1.72,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 50.7
+  },
+  {
+    "wind_speed": 13.58,
+    "power_output": 1988.3,
+    "rotor_rpm": 9.41,
+    "temperature": 51.2,
+    "gearbox_temp": 52.4,
+    "vibration": 1.63,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 13.06,
+    "power_output": 1984.2,
+    "rotor_rpm": 9.59,
+    "temperature": 50.6,
+    "gearbox_temp": 52.7,
+    "vibration": 1.74,
+    "hydraulic_pressure": 148.6,
+    "nacelle_humidity": 50.9
+  },
+  {
+    "wind_speed": 12.69,
+    "power_output": 2000.0,
+    "rotor_rpm": 9.46,
+    "temperature": 50.7,
+    "gearbox_temp": 52.4,
+    "vibration": 1.83,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 50.5
+  },
+  {
+    "wind_speed": 12.55,
+    "power_output": 1988.8,
+    "rotor_rpm": 9.34,
+    "temperature": 51.3,
+    "gearbox_temp": 52.8,
+    "vibration": 1.8,
+    "hydraulic_pressure": 146.3,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 12.92,
+    "power_output": 1963.6,
+    "rotor_rpm": 9.26,
+    "temperature": 51.7,
+    "gearbox_temp": 52.5,
+    "vibration": 1.73,
+    "hydraulic_pressure": 147.0,
+    "nacelle_humidity": 51.0
+  },
+  {
+    "wind_speed": 12.5,
+    "power_output": 1995.7,
+    "rotor_rpm": 9.14,
+    "temperature": 51.5,
+    "gearbox_temp": 52.3,
+    "vibration": 1.69,
+    "hydraulic_pressure": 146.3,
+    "nacelle_humidity": 51.1
+  },
+  {
+    "wind_speed": 11.95,
+    "power_output": 1987.1,
+    "rotor_rpm": 8.8,
+    "temperature": 52.1,
+    "gearbox_temp": 52.2,
+    "vibration": 1.64,
+    "hydraulic_pressure": 146.6,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 12.19,
+    "power_output": 1952.1,
+    "rotor_rpm": 8.77,
+    "temperature": 52.3,
+    "gearbox_temp": 52.5,
+    "vibration": 1.71,
+    "hydraulic_pressure": 146.0,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.42,
+    "power_output": 1952.0,
+    "rotor_rpm": 8.78,
+    "temperature": 52.4,
+    "gearbox_temp": 52.8,
+    "vibration": 1.7,
+    "hydraulic_pressure": 146.5,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 12.98,
+    "power_output": 1970.3,
+    "rotor_rpm": 9.06,
+    "temperature": 52.3,
+    "gearbox_temp": 52.9,
+    "vibration": 1.65,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 12.78,
+    "power_output": 1932.9,
+    "rotor_rpm": 9.09,
+    "temperature": 51.4,
+    "gearbox_temp": 53.0,
+    "vibration": 1.62,
+    "hydraulic_pressure": 146.3,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 12.9,
+    "power_output": 1945.7,
+    "rotor_rpm": 9.13,
+    "temperature": 50.7,
+    "gearbox_temp": 52.6,
+    "vibration": 1.69,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 51.3
+  },
+  {
+    "wind_speed": 12.91,
+    "power_output": 1905.6,
+    "rotor_rpm": 9.41,
+    "temperature": 50.6,
+    "gearbox_temp": 52.7,
+    "vibration": 1.57,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 13.08,
+    "power_output": 1921.4,
+    "rotor_rpm": 9.47,
+    "temperature": 50.9,
+    "gearbox_temp": 52.6,
+    "vibration": 1.53,
+    "hydraulic_pressure": 146.9,
+    "nacelle_humidity": 51.9
+  },
+  {
+    "wind_speed": 13.44,
+    "power_output": 1925.3,
+    "rotor_rpm": 9.66,
+    "temperature": 50.6,
+    "gearbox_temp": 52.6,
+    "vibration": 1.48,
+    "hydraulic_pressure": 146.1,
+    "nacelle_humidity": 52.3
+  },
+  {
+    "wind_speed": 13.89,
+    "power_output": 1933.6,
+    "rotor_rpm": 9.75,
+    "temperature": 51.3,
+    "gearbox_temp": 52.4,
+    "vibration": 1.48,
+    "hydraulic_pressure": 145.2,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 14.48,
+    "power_output": 1928.6,
+    "rotor_rpm": 9.86,
+    "temperature": 51.4,
+    "gearbox_temp": 52.8,
+    "vibration": 1.54,
+    "hydraulic_pressure": 146.0,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 14.69,
+    "power_output": 1928.0,
+    "rotor_rpm": 10.16,
+    "temperature": 51.2,
+    "gearbox_temp": 52.6,
+    "vibration": 1.59,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 14.75,
+    "power_output": 1937.3,
+    "rotor_rpm": 10.12,
+    "temperature": 50.5,
+    "gearbox_temp": 52.6,
+    "vibration": 1.57,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 51.7
+  },
+  {
+    "wind_speed": 15.06,
+    "power_output": 1909.7,
+    "rotor_rpm": 10.15,
+    "temperature": 50.9,
+    "gearbox_temp": 52.9,
+    "vibration": 1.58,
+    "hydraulic_pressure": 146.8,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 14.66,
+    "power_output": 1896.1,
+    "rotor_rpm": 10.14,
+    "temperature": 51.4,
+    "gearbox_temp": 52.8,
+    "vibration": 1.63,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 14.65,
+    "power_output": 1926.2,
+    "rotor_rpm": 10.14,
+    "temperature": 51.7,
+    "gearbox_temp": 52.6,
+    "vibration": 1.76,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 14.85,
+    "power_output": 1862.7,
+    "rotor_rpm": 10.2,
+    "temperature": 51.8,
+    "gearbox_temp": 52.3,
+    "vibration": 1.71,
+    "hydraulic_pressure": 146.7,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 15.42,
+    "power_output": 1885.1,
+    "rotor_rpm": 10.71,
+    "temperature": 51.6,
+    "gearbox_temp": 52.7,
+    "vibration": 1.71,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 15.85,
+    "power_output": 1923.4,
+    "rotor_rpm": 11.01,
+    "temperature": 50.8,
+    "gearbox_temp": 52.6,
+    "vibration": 1.79,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 52.4
+  },
+  {
+    "wind_speed": 15.49,
+    "power_output": 1921.5,
+    "rotor_rpm": 10.85,
+    "temperature": 50.3,
+    "gearbox_temp": 52.7,
+    "vibration": 1.75,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 52.6
+  },
+  {
+    "wind_speed": 14.94,
+    "power_output": 1914.3,
+    "rotor_rpm": 10.88,
+    "temperature": 50.0,
+    "gearbox_temp": 52.4,
+    "vibration": 1.78,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 52.3
+  },
+  {
+    "wind_speed": 15.28,
+    "power_output": 1879.1,
+    "rotor_rpm": 10.79,
+    "temperature": 49.4,
+    "gearbox_temp": 52.3,
+    "vibration": 1.87,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 15.29,
+    "power_output": 1935.6,
+    "rotor_rpm": 11.01,
+    "temperature": 49.0,
+    "gearbox_temp": 52.4,
+    "vibration": 1.95,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 15.85,
+    "power_output": 1922.7,
+    "rotor_rpm": 10.96,
+    "temperature": 48.6,
+    "gearbox_temp": 52.4,
+    "vibration": 1.88,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 51.6
+  },
+  {
+    "wind_speed": 15.36,
+    "power_output": 1934.5,
+    "rotor_rpm": 10.75,
+    "temperature": 49.4,
+    "gearbox_temp": 52.4,
+    "vibration": 1.93,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 51.4
+  },
+  {
+    "wind_speed": 15.27,
+    "power_output": 1909.4,
+    "rotor_rpm": 11.06,
+    "temperature": 49.1,
+    "gearbox_temp": 52.6,
+    "vibration": 1.82,
+    "hydraulic_pressure": 146.7,
+    "nacelle_humidity": 51.5
+  },
+  {
+    "wind_speed": 15.61,
+    "power_output": 1892.6,
+    "rotor_rpm": 10.93,
+    "temperature": 48.7,
+    "gearbox_temp": 52.9,
+    "vibration": 1.93,
+    "hydraulic_pressure": 146.3,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 15.98,
+    "power_output": 1892.8,
+    "rotor_rpm": 11.13,
+    "temperature": 49.6,
+    "gearbox_temp": 52.7,
+    "vibration": 1.99,
+    "hydraulic_pressure": 146.9,
+    "nacelle_humidity": 51.9
+  },
+  {
+    "wind_speed": 15.62,
+    "power_output": 1869.6,
+    "rotor_rpm": 11.13,
+    "temperature": 49.1,
+    "gearbox_temp": 52.6,
+    "vibration": 2.01,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 51.8
+  },
+  {
+    "wind_speed": 15.85,
+    "power_output": 1836.2,
+    "rotor_rpm": 11.12,
+    "temperature": 49.6,
+    "gearbox_temp": 52.7,
+    "vibration": 2.02,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 52.1
+  },
+  {
+    "wind_speed": 16.32,
+    "power_output": 1868.4,
+    "rotor_rpm": 11.28,
+    "temperature": 50.1,
+    "gearbox_temp": 52.7,
+    "vibration": 2.03,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 52.2
+  },
+  {
+    "wind_speed": 15.83,
+    "power_output": 1908.9,
+    "rotor_rpm": 11.48,
+    "temperature": 50.8,
+    "gearbox_temp": 52.4,
+    "vibration": 2.08,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 52.0
+  },
+  {
+    "wind_speed": 15.86,
+    "power_output": 1860.0,
+    "rotor_rpm": 11.53,
+    "temperature": 50.1,
+    "gearbox_temp": 52.2,
+    "vibration": 1.95,
+    "hydraulic_pressure": 146.8,
+    "nacelle_humidity": 52.5
+  },
+  {
+    "wind_speed": 15.8,
+    "power_output": 1895.0,
+    "rotor_rpm": 11.25,
+    "temperature": 50.7,
+    "gearbox_temp": 52.2,
+    "vibration": 1.8,
+    "hydraulic_pressure": 146.3,
+    "nacelle_humidity": 52.6
+  },
+  {
+    "wind_speed": 16.2,
+    "power_output": 1922.2,
+    "rotor_rpm": 11.26,
+    "temperature": 50.2,
+    "gearbox_temp": 52.2,
+    "vibration": 1.88,
+    "hydraulic_pressure": 145.6,
+    "nacelle_humidity": 52.8
+  },
+  {
+    "wind_speed": 16.5,
+    "power_output": 1969.6,
+    "rotor_rpm": 11.41,
+    "temperature": 50.7,
+    "gearbox_temp": 52.1,
+    "vibration": 1.78,
+    "hydraulic_pressure": 146.7,
+    "nacelle_humidity": 53.2
+  },
+  {
+    "wind_speed": 16.72,
+    "power_output": 1964.1,
+    "rotor_rpm": 11.6,
+    "temperature": 50.4,
+    "gearbox_temp": 52.5,
+    "vibration": 1.82,
+    "hydraulic_pressure": 146.8,
+    "nacelle_humidity": 53.4
+  },
+  {
+    "wind_speed": 16.4,
+    "power_output": 1983.8,
+    "rotor_rpm": 11.7,
+    "temperature": 50.9,
+    "gearbox_temp": 52.6,
+    "vibration": 1.77,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 53.8
+  },
+  {
+    "wind_speed": 16.45,
+    "power_output": 1937.1,
+    "rotor_rpm": 11.87,
+    "temperature": 51.5,
+    "gearbox_temp": 52.7,
+    "vibration": 1.7,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 53.6
+  },
+  {
+    "wind_speed": 16.28,
+    "power_output": 1919.9,
+    "rotor_rpm": 11.87,
+    "temperature": 51.7,
+    "gearbox_temp": 52.4,
+    "vibration": 1.72,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 53.6
+  },
+  {
+    "wind_speed": 16.3,
+    "power_output": 1870.7,
+    "rotor_rpm": 11.77,
+    "temperature": 51.4,
+    "gearbox_temp": 52.4,
+    "vibration": 1.82,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 53.2
+  },
+  {
+    "wind_speed": 16.45,
+    "power_output": 1861.0,
+    "rotor_rpm": 11.8,
+    "temperature": 51.3,
+    "gearbox_temp": 52.4,
+    "vibration": 1.93,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 52.9
+  },
+  {
+    "wind_speed": 16.04,
+    "power_output": 1846.2,
+    "rotor_rpm": 11.71,
+    "temperature": 51.1,
+    "gearbox_temp": 52.6,
+    "vibration": 1.79,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 53.1
+  },
+  {
+    "wind_speed": 15.98,
+    "power_output": 1880.9,
+    "rotor_rpm": 11.48,
+    "temperature": 51.5,
+    "gearbox_temp": 52.3,
+    "vibration": 1.87,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 53.1
+  },
+  {
+    "wind_speed": 16.02,
+    "power_output": 1883.4,
+    "rotor_rpm": 11.57,
+    "temperature": 51.8,
+    "gearbox_temp": 52.1,
+    "vibration": 1.95,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 52.7
+  },
+  {
+    "wind_speed": 15.81,
+    "power_output": 1904.1,
+    "rotor_rpm": 11.41,
+    "temperature": 51.4,
+    "gearbox_temp": 52.3,
+    "vibration": 2.03,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 53.0
+  },
+  {
+    "wind_speed": 15.45,
+    "power_output": 1909.8,
+    "rotor_rpm": 11.39,
+    "temperature": 51.5,
+    "gearbox_temp": 52.3,
+    "vibration": 1.86,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 53.1
+  },
+  {
+    "wind_speed": 15.82,
+    "power_output": 1905.4,
+    "rotor_rpm": 11.38,
+    "temperature": 51.4,
+    "gearbox_temp": 52.3,
+    "vibration": 1.74,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 52.9
+  },
+  {
+    "wind_speed": 16.1,
+    "power_output": 1844.7,
+    "rotor_rpm": 11.63,
+    "temperature": 50.6,
+    "gearbox_temp": 52.1,
+    "vibration": 1.8,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 53.0
+  },
+  {
+    "wind_speed": 16.14,
+    "power_output": 1873.3,
+    "rotor_rpm": 11.44,
+    "temperature": 50.3,
+    "gearbox_temp": 52.3,
+    "vibration": 1.88,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 52.9
+  },
+  {
+    "wind_speed": 16.53,
+    "power_output": 1867.6,
+    "rotor_rpm": 11.37,
+    "temperature": 50.1,
+    "gearbox_temp": 52.1,
+    "vibration": 1.95,
+    "hydraulic_pressure": 149.3,
+    "nacelle_humidity": 53.2
+  },
+  {
+    "wind_speed": 16.68,
+    "power_output": 1897.6,
+    "rotor_rpm": 11.45,
+    "temperature": 50.2,
+    "gearbox_temp": 52.1,
+    "vibration": 1.91,
+    "hydraulic_pressure": 149.8,
+    "nacelle_humidity": 53.3
+  },
+  {
+    "wind_speed": 16.83,
+    "power_output": 1842.5,
+    "rotor_rpm": 11.93,
+    "temperature": 49.7,
+    "gearbox_temp": 51.9,
+    "vibration": 1.8,
+    "hydraulic_pressure": 150.1,
+    "nacelle_humidity": 53.6
+  },
+  {
+    "wind_speed": 16.88,
+    "power_output": 1891.2,
+    "rotor_rpm": 12.1,
+    "temperature": 49.8,
+    "gearbox_temp": 51.6,
+    "vibration": 1.74,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 53.7
+  },
+  {
+    "wind_speed": 16.32,
+    "power_output": 1874.7,
+    "rotor_rpm": 11.79,
+    "temperature": 49.7,
+    "gearbox_temp": 52.1,
+    "vibration": 1.69,
+    "hydraulic_pressure": 148.6,
+    "nacelle_humidity": 53.9
+  },
+  {
+    "wind_speed": 15.83,
+    "power_output": 1906.5,
+    "rotor_rpm": 11.88,
+    "temperature": 49.3,
+    "gearbox_temp": 52.0,
+    "vibration": 1.73,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 54.4
+  },
+  {
+    "wind_speed": 15.25,
+    "power_output": 1947.4,
+    "rotor_rpm": 11.34,
+    "temperature": 49.5,
+    "gearbox_temp": 51.9,
+    "vibration": 1.87,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 54.3
+  },
+  {
+    "wind_speed": 15.46,
+    "power_output": 1981.0,
+    "rotor_rpm": 11.28,
+    "temperature": 49.5,
+    "gearbox_temp": 51.7,
+    "vibration": 1.85,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 53.9
+  },
+  {
+    "wind_speed": 15.83,
+    "power_output": 1989.3,
+    "rotor_rpm": 11.22,
+    "temperature": 49.2,
+    "gearbox_temp": 51.7,
+    "vibration": 1.96,
+    "hydraulic_pressure": 146.5,
+    "nacelle_humidity": 53.6
+  },
+  {
+    "wind_speed": 16.25,
+    "power_output": 1945.1,
+    "rotor_rpm": 11.48,
+    "temperature": 49.6,
+    "gearbox_temp": 51.6,
+    "vibration": 1.83,
+    "hydraulic_pressure": 146.1,
+    "nacelle_humidity": 53.7
+  },
+  {
+    "wind_speed": 15.78,
+    "power_output": 1947.4,
+    "rotor_rpm": 11.35,
+    "temperature": 49.5,
+    "gearbox_temp": 51.5,
+    "vibration": 1.93,
+    "hydraulic_pressure": 145.8,
+    "nacelle_humidity": 53.9
+  },
+  {
+    "wind_speed": 16.32,
+    "power_output": 1898.7,
+    "rotor_rpm": 11.73,
+    "temperature": 49.7,
+    "gearbox_temp": 51.6,
+    "vibration": 2.01,
+    "hydraulic_pressure": 145.6,
+    "nacelle_humidity": 54.1
+  },
+  {
+    "wind_speed": 15.74,
+    "power_output": 1898.2,
+    "rotor_rpm": 11.59,
+    "temperature": 49.2,
+    "gearbox_temp": 51.4,
+    "vibration": 1.9,
+    "hydraulic_pressure": 145.2,
+    "nacelle_humidity": 54.4
+  },
+  {
+    "wind_speed": 16.22,
+    "power_output": 1859.5,
+    "rotor_rpm": 11.78,
+    "temperature": 49.7,
+    "gearbox_temp": 51.8,
+    "vibration": 1.79,
+    "hydraulic_pressure": 146.2,
+    "nacelle_humidity": 54.6
+  },
+  {
+    "wind_speed": 15.93,
+    "power_output": 1905.8,
+    "rotor_rpm": 11.83,
+    "temperature": 50.3,
+    "gearbox_temp": 52.2,
+    "vibration": 1.72,
+    "hydraulic_pressure": 146.9,
+    "nacelle_humidity": 54.3
+  },
+  {
+    "wind_speed": 16.32,
+    "power_output": 1977.5,
+    "rotor_rpm": 11.83,
+    "temperature": 50.3,
+    "gearbox_temp": 52.2,
+    "vibration": 1.78,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 54.8
+  },
+  {
+    "wind_speed": 15.81,
+    "power_output": 1981.6,
+    "rotor_rpm": 11.63,
+    "temperature": 50.1,
+    "gearbox_temp": 52.0,
+    "vibration": 1.91,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 55.0
+  },
+  {
+    "wind_speed": 15.75,
+    "power_output": 1949.2,
+    "rotor_rpm": 11.72,
+    "temperature": 49.7,
+    "gearbox_temp": 52.0,
+    "vibration": 1.88,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 55.1
+  },
+  {
+    "wind_speed": 16.24,
+    "power_output": 1948.6,
+    "rotor_rpm": 11.65,
+    "temperature": 49.6,
+    "gearbox_temp": 52.3,
+    "vibration": 2.0,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 55.2
+  },
+  {
+    "wind_speed": 16.14,
+    "power_output": 1901.4,
+    "rotor_rpm": 11.54,
+    "temperature": 49.7,
+    "gearbox_temp": 52.0,
+    "vibration": 1.9,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 55.2
+  },
+  {
+    "wind_speed": 16.71,
+    "power_output": 1921.2,
+    "rotor_rpm": 11.47,
+    "temperature": 50.5,
+    "gearbox_temp": 52.3,
+    "vibration": 1.98,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 54.7
+  },
+  {
+    "wind_speed": 16.72,
+    "power_output": 1933.9,
+    "rotor_rpm": 11.42,
+    "temperature": 50.1,
+    "gearbox_temp": 52.7,
+    "vibration": 1.97,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 54.5
+  },
+  {
+    "wind_speed": 16.33,
+    "power_output": 1925.1,
+    "rotor_rpm": 11.47,
+    "temperature": 50.7,
+    "gearbox_temp": 53.1,
+    "vibration": 1.83,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 54.9
+  },
+  {
+    "wind_speed": 15.75,
+    "power_output": 1963.7,
+    "rotor_rpm": 11.23,
+    "temperature": 51.1,
+    "gearbox_temp": 53.3,
+    "vibration": 1.86,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 54.7
+  },
+  {
+    "wind_speed": 15.62,
+    "power_output": 1915.8,
+    "rotor_rpm": 11.28,
+    "temperature": 50.6,
+    "gearbox_temp": 53.2,
+    "vibration": 1.9,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 55.1
+  },
+  {
+    "wind_speed": 15.49,
+    "power_output": 1945.9,
+    "rotor_rpm": 11.1,
+    "temperature": 51.2,
+    "gearbox_temp": 53.0,
+    "vibration": 1.85,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 55.1
+  },
+  {
+    "wind_speed": 15.32,
+    "power_output": 1976.6,
+    "rotor_rpm": 11.27,
+    "temperature": 51.6,
+    "gearbox_temp": 53.1,
+    "vibration": 1.87,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 55.2
+  },
+  {
+    "wind_speed": 15.11,
+    "power_output": 1923.5,
+    "rotor_rpm": 11.27,
+    "temperature": 51.1,
+    "gearbox_temp": 53.2,
+    "vibration": 1.79,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 55.5
+  },
+  {
+    "wind_speed": 15.38,
+    "power_output": 1959.6,
+    "rotor_rpm": 11.19,
+    "temperature": 50.4,
+    "gearbox_temp": 53.4,
+    "vibration": 1.84,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 55.7
+  },
+  {
+    "wind_speed": 15.43,
+    "power_output": 1914.5,
+    "rotor_rpm": 11.32,
+    "temperature": 51.0,
+    "gearbox_temp": 53.2,
+    "vibration": 1.77,
+    "hydraulic_pressure": 149.3,
+    "nacelle_humidity": 55.7
+  },
+  {
+    "wind_speed": 15.41,
+    "power_output": 1902.3,
+    "rotor_rpm": 11.26,
+    "temperature": 51.4,
+    "gearbox_temp": 52.9,
+    "vibration": 1.78,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 56.0
+  },
+  {
+    "wind_speed": 15.16,
+    "power_output": 1928.7,
+    "rotor_rpm": 11.07,
+    "temperature": 51.2,
+    "gearbox_temp": 53.0,
+    "vibration": 1.84,
+    "hydraulic_pressure": 149.7,
+    "nacelle_humidity": 55.9
+  },
+  {
+    "wind_speed": 14.99,
+    "power_output": 1909.7,
+    "rotor_rpm": 11.1,
+    "temperature": 50.9,
+    "gearbox_temp": 52.9,
+    "vibration": 1.91,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 55.9
+  },
+  {
+    "wind_speed": 14.42,
+    "power_output": 1910.9,
+    "rotor_rpm": 10.7,
+    "temperature": 50.4,
+    "gearbox_temp": 53.3,
+    "vibration": 1.79,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 55.5
+  },
+  {
+    "wind_speed": 14.44,
+    "power_output": 1939.0,
+    "rotor_rpm": 10.61,
+    "temperature": 50.7,
+    "gearbox_temp": 53.6,
+    "vibration": 1.68,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 55.6
+  },
+  {
+    "wind_speed": 14.06,
+    "power_output": 1973.2,
+    "rotor_rpm": 10.45,
+    "temperature": 51.3,
+    "gearbox_temp": 53.4,
+    "vibration": 1.69,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 56.0
+  },
+  {
+    "wind_speed": 13.66,
+    "power_output": 1981.0,
+    "rotor_rpm": 10.35,
+    "temperature": 50.7,
+    "gearbox_temp": 53.2,
+    "vibration": 1.73,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 55.8
+  },
+  {
+    "wind_speed": 13.37,
+    "power_output": 1906.8,
+    "rotor_rpm": 10.1,
+    "temperature": 50.5,
+    "gearbox_temp": 52.8,
+    "vibration": 1.79,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 55.8
+  },
+  {
+    "wind_speed": 13.94,
+    "power_output": 1911.4,
+    "rotor_rpm": 9.85,
+    "temperature": 51.0,
+    "gearbox_temp": 52.6,
+    "vibration": 1.82,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 55.6
+  },
+  {
+    "wind_speed": 13.95,
+    "power_output": 1928.8,
+    "rotor_rpm": 10.13,
+    "temperature": 50.7,
+    "gearbox_temp": 52.4,
+    "vibration": 1.72,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 55.9
+  },
+  {
+    "wind_speed": 14.44,
+    "power_output": 1974.7,
+    "rotor_rpm": 10.11,
+    "temperature": 51.4,
+    "gearbox_temp": 52.4,
+    "vibration": 1.77,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 56.2
+  },
+  {
+    "wind_speed": 14.48,
+    "power_output": 1947.5,
+    "rotor_rpm": 9.99,
+    "temperature": 51.7,
+    "gearbox_temp": 52.2,
+    "vibration": 1.83,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 56.3
+  },
+  {
+    "wind_speed": 14.93,
+    "power_output": 1910.2,
+    "rotor_rpm": 10.06,
+    "temperature": 51.4,
+    "gearbox_temp": 52.3,
+    "vibration": 1.69,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 14.68,
+    "power_output": 1927.2,
+    "rotor_rpm": 10.19,
+    "temperature": 51.7,
+    "gearbox_temp": 52.6,
+    "vibration": 1.6,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 14.51,
+    "power_output": 1896.8,
+    "rotor_rpm": 10.08,
+    "temperature": 51.2,
+    "gearbox_temp": 52.7,
+    "vibration": 1.71,
+    "hydraulic_pressure": 148.6,
+    "nacelle_humidity": 57.3
+  },
+  {
+    "wind_speed": 14.9,
+    "power_output": 1886.1,
+    "rotor_rpm": 10.09,
+    "temperature": 50.6,
+    "gearbox_temp": 52.7,
+    "vibration": 1.72,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 15.36,
+    "power_output": 1917.6,
+    "rotor_rpm": 10.54,
+    "temperature": 51.1,
+    "gearbox_temp": 52.4,
+    "vibration": 1.72,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 14.79,
+    "power_output": 1868.0,
+    "rotor_rpm": 10.81,
+    "temperature": 50.7,
+    "gearbox_temp": 52.8,
+    "vibration": 1.7,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 56.3
+  },
+  {
+    "wind_speed": 14.6,
+    "power_output": 1916.6,
+    "rotor_rpm": 10.73,
+    "temperature": 50.6,
+    "gearbox_temp": 53.2,
+    "vibration": 1.69,
+    "hydraulic_pressure": 149.8,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 15.11,
+    "power_output": 1887.6,
+    "rotor_rpm": 10.86,
+    "temperature": 49.9,
+    "gearbox_temp": 53.5,
+    "vibration": 1.69,
+    "hydraulic_pressure": 149.9,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 15.69,
+    "power_output": 1842.3,
+    "rotor_rpm": 10.8,
+    "temperature": 49.9,
+    "gearbox_temp": 53.0,
+    "vibration": 1.6,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 15.22,
+    "power_output": 1884.8,
+    "rotor_rpm": 10.75,
+    "temperature": 50.4,
+    "gearbox_temp": 52.9,
+    "vibration": 1.69,
+    "hydraulic_pressure": 149.5,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 15.23,
+    "power_output": 1916.9,
+    "rotor_rpm": 10.96,
+    "temperature": 49.8,
+    "gearbox_temp": 52.8,
+    "vibration": 1.62,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 15.0,
+    "power_output": 1944.2,
+    "rotor_rpm": 10.82,
+    "temperature": 49.3,
+    "gearbox_temp": 53.1,
+    "vibration": 1.56,
+    "hydraulic_pressure": 148.7,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 14.99,
+    "power_output": 1948.5,
+    "rotor_rpm": 10.83,
+    "temperature": 48.9,
+    "gearbox_temp": 53.3,
+    "vibration": 1.73,
+    "hydraulic_pressure": 148.5,
+    "nacelle_humidity": 56.2
+  },
+  {
+    "wind_speed": 15.24,
+    "power_output": 1906.0,
+    "rotor_rpm": 10.81,
+    "temperature": 48.8,
+    "gearbox_temp": 53.2,
+    "vibration": 1.65,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 15.23,
+    "power_output": 1880.0,
+    "rotor_rpm": 10.99,
+    "temperature": 49.0,
+    "gearbox_temp": 53.0,
+    "vibration": 1.69,
+    "hydraulic_pressure": 146.9,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 14.94,
+    "power_output": 1897.0,
+    "rotor_rpm": 10.87,
+    "temperature": 49.0,
+    "gearbox_temp": 53.1,
+    "vibration": 1.73,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 56.7
+  },
+  {
+    "wind_speed": 15.48,
+    "power_output": 1918.5,
+    "rotor_rpm": 10.85,
+    "temperature": 48.7,
+    "gearbox_temp": 52.8,
+    "vibration": 1.7,
+    "hydraulic_pressure": 146.7,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 15.26,
+    "power_output": 1980.1,
+    "rotor_rpm": 10.82,
+    "temperature": 49.1,
+    "gearbox_temp": 52.7,
+    "vibration": 1.71,
+    "hydraulic_pressure": 146.6,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 15.39,
+    "power_output": 1938.4,
+    "rotor_rpm": 10.84,
+    "temperature": 49.7,
+    "gearbox_temp": 52.5,
+    "vibration": 1.72,
+    "hydraulic_pressure": 146.1,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 15.5,
+    "power_output": 1981.2,
+    "rotor_rpm": 10.82,
+    "temperature": 50.4,
+    "gearbox_temp": 52.6,
+    "vibration": 1.66,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 15.53,
+    "power_output": 1996.8,
+    "rotor_rpm": 11.17,
+    "temperature": 50.7,
+    "gearbox_temp": 52.7,
+    "vibration": 1.7,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 15.85,
+    "power_output": 1924.7,
+    "rotor_rpm": 11.43,
+    "temperature": 50.9,
+    "gearbox_temp": 52.4,
+    "vibration": 1.68,
+    "hydraulic_pressure": 147.2,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 15.33,
+    "power_output": 1941.3,
+    "rotor_rpm": 11.12,
+    "temperature": 50.8,
+    "gearbox_temp": 52.8,
+    "vibration": 1.78,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 56.7
+  },
+  {
+    "wind_speed": 15.15,
+    "power_output": 1935.4,
+    "rotor_rpm": 11.03,
+    "temperature": 50.2,
+    "gearbox_temp": 52.8,
+    "vibration": 1.75,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 15.12,
+    "power_output": 1927.2,
+    "rotor_rpm": 10.99,
+    "temperature": 50.9,
+    "gearbox_temp": 53.1,
+    "vibration": 1.67,
+    "hydraulic_pressure": 148.5,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 14.97,
+    "power_output": 1921.2,
+    "rotor_rpm": 11.01,
+    "temperature": 50.6,
+    "gearbox_temp": 53.1,
+    "vibration": 1.79,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 57.1
+  },
+  {
+    "wind_speed": 15.55,
+    "power_output": 1925.1,
+    "rotor_rpm": 11.14,
+    "temperature": 50.6,
+    "gearbox_temp": 53.3,
+    "vibration": 1.79,
+    "hydraulic_pressure": 149.5,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 15.5,
+    "power_output": 1906.7,
+    "rotor_rpm": 11.24,
+    "temperature": 51.0,
+    "gearbox_temp": 53.5,
+    "vibration": 1.78,
+    "hydraulic_pressure": 150.1,
+    "nacelle_humidity": 56.7
+  },
+  {
+    "wind_speed": 15.67,
+    "power_output": 1932.9,
+    "rotor_rpm": 11.16,
+    "temperature": 50.8,
+    "gearbox_temp": 53.4,
+    "vibration": 1.82,
+    "hydraulic_pressure": 150.0,
+    "nacelle_humidity": 57.1
+  },
+  {
+    "wind_speed": 15.77,
+    "power_output": 1933.4,
+    "rotor_rpm": 11.43,
+    "temperature": 50.4,
+    "gearbox_temp": 53.6,
+    "vibration": 1.87,
+    "hydraulic_pressure": 150.8,
+    "nacelle_humidity": 57.4
+  },
+  {
+    "wind_speed": 15.99,
+    "power_output": 1967.7,
+    "rotor_rpm": 11.4,
+    "temperature": 49.8,
+    "gearbox_temp": 53.7,
+    "vibration": 1.94,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 57.2
+  },
+  {
+    "wind_speed": 15.9,
+    "power_output": 1910.0,
+    "rotor_rpm": 11.57,
+    "temperature": 50.2,
+    "gearbox_temp": 53.5,
+    "vibration": 2.01,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 15.75,
+    "power_output": 1901.9,
+    "rotor_rpm": 11.41,
+    "temperature": 50.7,
+    "gearbox_temp": 53.5,
+    "vibration": 1.99,
+    "hydraulic_pressure": 148.7,
+    "nacelle_humidity": 57.2
+  },
+  {
+    "wind_speed": 15.44,
+    "power_output": 1930.8,
+    "rotor_rpm": 11.4,
+    "temperature": 50.3,
+    "gearbox_temp": 53.0,
+    "vibration": 1.93,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 15.01,
+    "power_output": 1956.9,
+    "rotor_rpm": 11.3,
+    "temperature": 50.2,
+    "gearbox_temp": 52.9,
+    "vibration": 1.86,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 57.1
+  },
+  {
+    "wind_speed": 15.54,
+    "power_output": 1957.0,
+    "rotor_rpm": 11.07,
+    "temperature": 49.8,
+    "gearbox_temp": 52.6,
+    "vibration": 1.87,
+    "hydraulic_pressure": 147.8,
+    "nacelle_humidity": 56.7
+  },
+  {
+    "wind_speed": 16.08,
+    "power_output": 1938.0,
+    "rotor_rpm": 11.2,
+    "temperature": 49.9,
+    "gearbox_temp": 52.6,
+    "vibration": 1.81,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 15.76,
+    "power_output": 1928.1,
+    "rotor_rpm": 11.31,
+    "temperature": 49.4,
+    "gearbox_temp": 53.0,
+    "vibration": 1.77,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 15.98,
+    "power_output": 1902.7,
+    "rotor_rpm": 11.18,
+    "temperature": 49.6,
+    "gearbox_temp": 52.9,
+    "vibration": 1.84,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 56.0
+  },
+  {
+    "wind_speed": 15.95,
+    "power_output": 1918.3,
+    "rotor_rpm": 11.2,
+    "temperature": 49.5,
+    "gearbox_temp": 52.6,
+    "vibration": 1.78,
+    "hydraulic_pressure": 146.8,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 16.28,
+    "power_output": 1857.5,
+    "rotor_rpm": 11.47,
+    "temperature": 49.5,
+    "gearbox_temp": 52.9,
+    "vibration": 1.74,
+    "hydraulic_pressure": 147.3,
+    "nacelle_humidity": 56.1
+  },
+  {
+    "wind_speed": 15.78,
+    "power_output": 1844.2,
+    "rotor_rpm": 11.24,
+    "temperature": 49.9,
+    "gearbox_temp": 52.7,
+    "vibration": 1.73,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 16.31,
+    "power_output": 1907.3,
+    "rotor_rpm": 11.31,
+    "temperature": 50.5,
+    "gearbox_temp": 52.7,
+    "vibration": 1.82,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 56.7
+  },
+  {
+    "wind_speed": 16.23,
+    "power_output": 1905.1,
+    "rotor_rpm": 11.47,
+    "temperature": 51.0,
+    "gearbox_temp": 52.7,
+    "vibration": 1.92,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 56.5
+  },
+  {
+    "wind_speed": 16.6,
+    "power_output": 1881.4,
+    "rotor_rpm": 11.77,
+    "temperature": 51.5,
+    "gearbox_temp": 52.8,
+    "vibration": 1.97,
+    "hydraulic_pressure": 148.5,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 17.11,
+    "power_output": 1962.5,
+    "rotor_rpm": 11.92,
+    "temperature": 51.6,
+    "gearbox_temp": 52.6,
+    "vibration": 1.97,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 17.67,
+    "power_output": 1938.6,
+    "rotor_rpm": 11.96,
+    "temperature": 51.4,
+    "gearbox_temp": 52.8,
+    "vibration": 2.02,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 56.4
+  },
+  {
+    "wind_speed": 17.95,
+    "power_output": 1893.9,
+    "rotor_rpm": 12.47,
+    "temperature": 51.0,
+    "gearbox_temp": 53.0,
+    "vibration": 1.88,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 56.6
+  },
+  {
+    "wind_speed": 18.46,
+    "power_output": 1945.8,
+    "rotor_rpm": 12.51,
+    "temperature": 51.5,
+    "gearbox_temp": 53.0,
+    "vibration": 1.88,
+    "hydraulic_pressure": 148.7,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 18.19,
+    "power_output": 1907.8,
+    "rotor_rpm": 12.91,
+    "temperature": 51.3,
+    "gearbox_temp": 53.0,
+    "vibration": 1.92,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 57.3
+  },
+  {
+    "wind_speed": 18.66,
+    "power_output": 1968.7,
+    "rotor_rpm": 13.26,
+    "temperature": 51.3,
+    "gearbox_temp": 52.8,
+    "vibration": 1.98,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 57.2
+  },
+  {
+    "wind_speed": 18.8,
+    "power_output": 1905.2,
+    "rotor_rpm": 13.28,
+    "temperature": 51.6,
+    "gearbox_temp": 52.5,
+    "vibration": 2.05,
+    "hydraulic_pressure": 147.1,
+    "nacelle_humidity": 57.6
+  },
+  {
+    "wind_speed": 18.93,
+    "power_output": 1925.5,
+    "rotor_rpm": 13.46,
+    "temperature": 51.8,
+    "gearbox_temp": 52.5,
+    "vibration": 2.14,
+    "hydraulic_pressure": 146.5,
+    "nacelle_humidity": 58.0
+  },
+  {
+    "wind_speed": 18.96,
+    "power_output": 1897.7,
+    "rotor_rpm": 13.52,
+    "temperature": 51.9,
+    "gearbox_temp": 52.3,
+    "vibration": 2.05,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 58.4
+  },
+  {
+    "wind_speed": 19.39,
+    "power_output": 1845.4,
+    "rotor_rpm": 13.58,
+    "temperature": 51.2,
+    "gearbox_temp": 52.6,
+    "vibration": 2.0,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 58.3
+  },
+  {
+    "wind_speed": 19.71,
+    "power_output": 1881.8,
+    "rotor_rpm": 13.81,
+    "temperature": 50.5,
+    "gearbox_temp": 52.8,
+    "vibration": 2.02,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 58.0
+  },
+  {
+    "wind_speed": 20.21,
+    "power_output": 1894.9,
+    "rotor_rpm": 14.05,
+    "temperature": 50.4,
+    "gearbox_temp": 52.7,
+    "vibration": 2.05,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 58.3
+  },
+  {
+    "wind_speed": 20.08,
+    "power_output": 1895.3,
+    "rotor_rpm": 14.36,
+    "temperature": 49.8,
+    "gearbox_temp": 52.5,
+    "vibration": 2.13,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 58.1
+  },
+  {
+    "wind_speed": 19.61,
+    "power_output": 1947.7,
+    "rotor_rpm": 14.52,
+    "temperature": 49.6,
+    "gearbox_temp": 52.7,
+    "vibration": 2.02,
+    "hydraulic_pressure": 148.7,
+    "nacelle_humidity": 58.6
+  },
+  {
+    "wind_speed": 20.09,
+    "power_output": 1906.5,
+    "rotor_rpm": 14.6,
+    "temperature": 50.1,
+    "gearbox_temp": 52.8,
+    "vibration": 2.07,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 58.6
+  },
+  {
+    "wind_speed": 19.9,
+    "power_output": 1913.1,
+    "rotor_rpm": 14.34,
+    "temperature": 49.5,
+    "gearbox_temp": 52.7,
+    "vibration": 2.07,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 58.5
+  },
+  {
+    "wind_speed": 19.74,
+    "power_output": 1933.6,
+    "rotor_rpm": 14.44,
+    "temperature": 49.1,
+    "gearbox_temp": 52.7,
+    "vibration": 2.15,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 58.5
+  },
+  {
+    "wind_speed": 19.73,
+    "power_output": 1935.2,
+    "rotor_rpm": 14.32,
+    "temperature": 50.0,
+    "gearbox_temp": 52.4,
+    "vibration": 2.16,
+    "hydraulic_pressure": 147.4,
+    "nacelle_humidity": 58.3
+  },
+  {
+    "wind_speed": 19.87,
+    "power_output": 1902.6,
+    "rotor_rpm": 14.24,
+    "temperature": 50.0,
+    "gearbox_temp": 52.7,
+    "vibration": 2.13,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 58.6
+  },
+  {
+    "wind_speed": 20.14,
+    "power_output": 1898.5,
+    "rotor_rpm": 14.4,
+    "temperature": 50.1,
+    "gearbox_temp": 52.7,
+    "vibration": 2.22,
+    "hydraulic_pressure": 149.1,
+    "nacelle_humidity": 58.3
+  },
+  {
+    "wind_speed": 20.05,
+    "power_output": 1869.3,
+    "rotor_rpm": 14.55,
+    "temperature": 50.1,
+    "gearbox_temp": 53.0,
+    "vibration": 2.2,
+    "hydraulic_pressure": 148.8,
+    "nacelle_humidity": 58.3
+  },
+  {
+    "wind_speed": 19.93,
+    "power_output": 1853.3,
+    "rotor_rpm": 14.64,
+    "temperature": 49.5,
+    "gearbox_temp": 53.2,
+    "vibration": 2.25,
+    "hydraulic_pressure": 148.0,
+    "nacelle_humidity": 58.7
+  },
+  {
+    "wind_speed": 19.41,
+    "power_output": 1879.2,
+    "rotor_rpm": 14.58,
+    "temperature": 49.9,
+    "gearbox_temp": 52.8,
+    "vibration": 2.09,
+    "hydraulic_pressure": 147.9,
+    "nacelle_humidity": 58.4
+  },
+  {
+    "wind_speed": 19.45,
+    "power_output": 1940.3,
+    "rotor_rpm": 14.26,
+    "temperature": 50.5,
+    "gearbox_temp": 53.1,
+    "vibration": 2.01,
+    "hydraulic_pressure": 147.6,
+    "nacelle_humidity": 57.9
+  },
+  {
+    "wind_speed": 19.94,
+    "power_output": 1909.3,
+    "rotor_rpm": 14.23,
+    "temperature": 50.5,
+    "gearbox_temp": 53.1,
+    "vibration": 1.95,
+    "hydraulic_pressure": 148.3,
+    "nacelle_humidity": 57.4
+  },
+  {
+    "wind_speed": 20.47,
+    "power_output": 1867.6,
+    "rotor_rpm": 14.45,
+    "temperature": 50.8,
+    "gearbox_temp": 52.7,
+    "vibration": 1.94,
+    "hydraulic_pressure": 149.2,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 20.41,
+    "power_output": 1938.2,
+    "rotor_rpm": 14.71,
+    "temperature": 50.2,
+    "gearbox_temp": 52.7,
+    "vibration": 2.0,
+    "hydraulic_pressure": 149.7,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 19.82,
+    "power_output": 1911.3,
+    "rotor_rpm": 14.56,
+    "temperature": 50.7,
+    "gearbox_temp": 53.1,
+    "vibration": 1.94,
+    "hydraulic_pressure": 149.3,
+    "nacelle_humidity": 57.0
+  },
+  {
+    "wind_speed": 19.6,
+    "power_output": 1909.9,
+    "rotor_rpm": 14.3,
+    "temperature": 51.3,
+    "gearbox_temp": 53.0,
+    "vibration": 1.93,
+    "hydraulic_pressure": 148.4,
+    "nacelle_humidity": 56.8
+  },
+  {
+    "wind_speed": 20.14,
+    "power_output": 1930.6,
+    "rotor_rpm": 14.59,
+    "temperature": 51.4,
+    "gearbox_temp": 52.9,
+    "vibration": 1.96,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 57.3
+  },
+  {
+    "wind_speed": 20.15,
+    "power_output": 1888.1,
+    "rotor_rpm": 14.54,
+    "temperature": 51.2,
+    "gearbox_temp": 53.3,
+    "vibration": 1.96,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 57.1
+  },
+  {
+    "wind_speed": 19.87,
+    "power_output": 1913.8,
+    "rotor_rpm": 14.67,
+    "temperature": 50.9,
+    "gearbox_temp": 53.5,
+    "vibration": 1.89,
+    "hydraulic_pressure": 148.9,
+    "nacelle_humidity": 56.9
+  },
+  {
+    "wind_speed": 19.54,
+    "power_output": 1906.8,
+    "rotor_rpm": 14.56,
+    "temperature": 50.1,
+    "gearbox_temp": 53.6,
+    "vibration": 1.96,
+    "hydraulic_pressure": 149.0,
+    "nacelle_humidity": 57.4
+  },
+  {
+    "wind_speed": 19.7,
+    "power_output": 1926.4,
+    "rotor_rpm": 14.34,
+    "temperature": 49.5,
+    "gearbox_temp": 53.7,
+    "vibration": 1.94,
+    "hydraulic_pressure": 149.8,
+    "nacelle_humidity": 57.6
+  },
+  {
+    "wind_speed": 19.44,
+    "power_output": 1913.6,
+    "rotor_rpm": 14.37,
+    "temperature": 49.6,
+    "gearbox_temp": 53.7,
+    "vibration": 2.04,
+    "hydraulic_pressure": 148.5,
+    "nacelle_humidity": 57.9
+  },
+  {
+    "wind_speed": 18.95,
+    "power_output": 1855.0,
+    "rotor_rpm": 14.16,
+    "temperature": 49.7,
+    "gearbox_temp": 53.2,
+    "vibration": 2.06,
+    "hydraulic_pressure": 148.2,
+    "nacelle_humidity": 57.7
+  },
+  {
+    "wind_speed": 19.54,
+    "power_output": 1908.6,
+    "rotor_rpm": 14.1,
+    "temperature": 49.6,
+    "gearbox_temp": 52.9,
+    "vibration": 2.05,
+    "hydraulic_pressure": 147.7,
+    "nacelle_humidity": 57.9
+  },
+  {
+    "wind_speed": 19.49,
+    "power_output": 1970.8,
+    "rotor_rpm": 13.88,
+    "temperature": 49.2,
+    "gearbox_temp": 53.3,
+    "vibration": 1.98,
+    "hydraulic_pressure": 148.1,
+    "nacelle_humidity": 57.4
+  },
+  {
+    "wind_speed": 20.06,
+    "power_output": 1990.3,
+    "rotor_rpm": 14.25,
+    "temperature": 49.0,
+    "gearbox_temp": 53.6,
+    "vibration": 1.98,
+    "hydraulic_pressure": 147.5,
+    "nacelle_humidity": 57.7
+  },
+  {
+    "wind_speed": 20.33,
+    "power_output": 1986.0,
+    "rotor_rpm": 14.48,
+    "temperature": 48.8,
+    "gearbox_temp": 53.6,
+    "vibration": 2.01,
+    "hydraulic_pressure": 146.6,
+    "nacelle_humidity": 57.8
+  },
+  {
+    "wind_speed": 20.55,
+    "power_output": 1944.1,
+    "rotor_rpm": 14.59,
+    "temperature": 48.7,
+    "gearbox_temp": 53.5,
+    "vibration": 1.95,
+    "hydraulic_pressure": 145.9,
+    "nacelle_humidity": 57.7
+  },
+  {
+    "wind_speed": 20.65,
+    "power_output": 1908.6,
+    "rotor_rpm": 14.86,
+    "temperature": 48.7,
+    "gearbox_temp": 53.4,
+    "vibration": 1.93,
+    "hydraulic_pressure": 145.5,
+    "nacelle_humidity": 57.5
+  },
+  {
+    "wind_speed": 20.58,
+    "power_output": 1917.4,
+    "rotor_rpm": 14.72,
+    "temperature": 49.3,
+    "gearbox_temp": 53.4,
+    "vibration": 1.9,
+    "hydraulic_pressure": 146.2,
+    "nacelle_humidity": 57.4
+  },
+  {
+    "wind_speed": 20.61,
+    "power_output": 1905.1,
+    "rotor_rpm": 14.59,
+    "temperature": 48.9,
+    "gearbox_temp": 53.7,
+    "vibration": 1.91,
+    "hydraulic_pressure": 146.6,
+    "nacelle_humidity": 57.0
+  }
+]
