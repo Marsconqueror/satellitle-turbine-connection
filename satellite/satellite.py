@@ -2,11 +2,9 @@
 CSU33D03 - Main Project 2025-26
 LEO SATELLITE RELAY  -  Device B
 
-New vs old:
-  - Imports channel.py (realistic LEO delay, loss, visibility windows)
-  - Imports security.py (HMAC verification on every message)
-  - Sequence gap detection
-  - Satellite health STATUS_REQUEST handler
+This script acts as the satellite relay sitting between the wind turbine
+and the ground control station. It simulates a real Low Earth Orbit satellite
+by adding realistic communication delays, packet loss, and visibility windows.
 """
 
 import socket, threading, time, random, json, logging, sys, os, queue
@@ -29,20 +27,24 @@ logging.basicConfig(
 )
 log = logging.getLogger("satellite")
 
+# We keep two dictionaries, one for turbines and one for ground stations
+# that are currently connected so we know where to send messages
 turbine_connections = {}
 ground_connections  = {}
 t_lock = threading.Lock()
 g_lock = threading.Lock()
 
+# The relay queue holds telemetry messages waiting to be forwarded to the ground
+# The command queue holds commands waiting to be sent to a specific turbine
 relay_queue   = queue.Queue(maxsize=500)
 command_queue = defaultdict(lambda: queue.Queue(maxsize=100))
 
+# We use this to track sequence numbers per turbine so we can detect dropped packets
 _seq_tracker = {}
 _stats_lock  = threading.Lock()
 
-# =============================================================================
-# Turbine handler
-# =============================================================================
+
+# This function starts the server that listens for incoming turbine connections
 def turbine_listener():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -51,10 +53,12 @@ def turbine_listener():
         log.info(f"  Turbine uplink  -> 0.0.0.0:{TURBINE_LISTEN_PORT}")
         while True:
             conn, addr = srv.accept()
+            # Each turbine gets its own thread so they dont block each other
             threading.Thread(target=handle_turbine,
                              args=(conn, addr), daemon=True).start()
 
 
+# This handles everything that comes in from a single turbine connection
 def handle_turbine(conn, addr):
     turbine_id = None
     buffer     = ""
@@ -74,6 +78,8 @@ def handle_turbine(conn, addr):
                     except json.JSONDecodeError:
                         continue
 
+                    # Every message must pass HMAC verification before we act on it
+                    # If it fails we just drop it and log a warning
                     ok, reason = verify_message(msg)
                     if not ok:
                         log.warning(f"Rejected msg from {addr}: {reason}")
@@ -82,6 +88,7 @@ def handle_turbine(conn, addr):
                     t   = msg.get("type", "")
 
                     if t == "REGISTER":
+                        # The turbine is introducing itself for the first time
                         turbine_id = msg.get("turbine_id", str(addr))
                         with t_lock:
                             turbine_connections[turbine_id] = {"sock": conn, "meta": msg}
@@ -96,7 +103,9 @@ def handle_turbine(conn, addr):
                         conn.sendall((json.dumps(ack) + "\n").encode())
 
                     elif t == "TELEMETRY":
+                        # Check for any gaps in the sequence numbers
                         _track_seq(msg)
+                        # If the link is currently down or we simulate a packet loss drop it
                         if not is_link_up() or channel_loss():
                             continue
                         msg["relayed_by"]      = SATELLITE_ID
@@ -107,12 +116,14 @@ def handle_turbine(conn, addr):
                             log.warning("Relay queue full - dropping telemetry")
 
                     elif t == "ACK":
+                        # Forward the turbines acknowledgement back to the ground station
                         try:
                             relay_queue.put_nowait(json.dumps(sign_message(msg)))
                         except queue.Full:
                             pass
 
                     elif t == "BEACON":
+                        # The turbine is broadcasting its presence so ground stations know its alive
                         beacon = sign_message({
                             "type":       "TURBINE_BEACON",
                             "turbine_id": turbine_id,
@@ -121,7 +132,8 @@ def handle_turbine(conn, addr):
                         })
                         _broadcast_ground(json.dumps(beacon))
 
-                    # flush queued commands
+                    # After handling the message check if there are any commands
+                    # sitting in the queue waiting to be sent to this turbine
                     if turbine_id:
                         cq = command_queue[turbine_id]
                         while not cq.empty():
@@ -139,6 +151,7 @@ def handle_turbine(conn, addr):
                 turbine_connections.pop(turbine_id, None)
 
 
+# This checks the sequence number on incoming telemetry and warns us if packets were skipped
 def _track_seq(msg):
     tid = msg.get("turbine_id")
     seq = msg.get("seq")
@@ -152,9 +165,8 @@ def _track_seq(msg):
                             f"(expected {prev+1}, got {seq})")
         _seq_tracker[tid] = seq
 
-# =============================================================================
-# Ground handler
-# =============================================================================
+
+# This starts the server that listens for ground station connections
 def ground_listener():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -167,6 +179,7 @@ def ground_listener():
                              args=(conn, addr), daemon=True).start()
 
 
+# This handles everything that comes in from a single ground station connection
 def handle_ground(conn, addr):
     ground_id = None
     buffer    = ""
@@ -186,6 +199,7 @@ def handle_ground(conn, addr):
                     except json.JSONDecodeError:
                         continue
 
+                    # Verify the message signature before doing anything with it
                     ok, reason = verify_message(msg)
                     if not ok:
                         log.warning(f"Rejected ground msg: {reason}")
@@ -194,6 +208,7 @@ def handle_ground(conn, addr):
                     t   = msg.get("type", "")
 
                     if t == "REGISTER":
+                        # Ground station is connecting for the first time
                         ground_id = msg.get("ground_id", str(addr))
                         with g_lock:
                             ground_connections[ground_id] = {"sock": conn}
@@ -207,9 +222,11 @@ def handle_ground(conn, addr):
                         conn.sendall((json.dumps(ack) + "\n").encode())
 
                     elif t == "COMMAND":
+                        # Ground wants to send a control command to a turbine
                         _route_command(conn, msg)
 
                     elif t == "DISCOVER":
+                        # Ground is asking which turbines are currently connected
                         with t_lock:
                             known = [{"turbine_id": tid, "meta": info["meta"]}
                                      for tid, info in turbine_connections.items()]
@@ -223,6 +240,7 @@ def handle_ground(conn, addr):
                         conn.sendall((json.dumps(resp) + "\n").encode())
 
                     elif t == "PING":
+                        # Ground is checking if the satellite link is alive
                         pong = sign_message({
                             "type":         "PONG",
                             "satellite_id": SATELLITE_ID,
@@ -233,6 +251,7 @@ def handle_ground(conn, addr):
                         conn.sendall((json.dumps(pong) + "\n").encode())
 
                     elif t == "STATUS_REQUEST":
+                        # Ground wants a full health report from the satellite
                         _send_status(conn)
 
     except Exception as e:
@@ -243,6 +262,8 @@ def handle_ground(conn, addr):
                 ground_connections.pop(ground_id, None)
 
 
+# This takes a command from the ground and tries to deliver it to the right turbine
+# If the link is down or the turbine is unreachable it queues it for later
 def _route_command(conn, msg):
     target = msg.get("turbine_id")
     msg["routed_via"]      = SATELLITE_ID
@@ -261,12 +282,15 @@ def _route_command(conn, msg):
                 channel_delay()
                 tc["sock"].sendall((payload + "\n").encode())
             except OSError:
+                # If sending fails mid attempt we queue it instead
                 command_queue[target].put(payload)
                 queued = True
         else:
+            # Turbine isnt connected right now so we hold the command until it reconnects
             command_queue[target].put(payload)
             queued = True
 
+    # Send the ground station a confirmation that we received and routed the command
     try:
         ack = sign_message({
             "type":       "ROUTE_ACK",
@@ -281,6 +305,8 @@ def _route_command(conn, msg):
         pass
 
 
+# This sends a full status report back to whoever requested it
+# It includes how many turbines and ground stations are connected and channel stats
 def _send_status(conn):
     with t_lock: tc = len(turbine_connections)
     with g_lock: gc = len(ground_connections)
@@ -300,9 +326,8 @@ def _send_status(conn):
     except OSError:
         pass
 
-# =============================================================================
-# Relay + broadcast
-# =============================================================================
+
+# This loop constantly pulls messages from the relay queue and sends them to all ground stations
 def relay_loop():
     while True:
         try:
@@ -312,6 +337,8 @@ def relay_loop():
             pass
 
 
+# This sends a message to every ground station that is currently connected
+# If a ground station has disconnected it gets removed from the list
 def _broadcast_ground(payload):
     channel_delay()
     with g_lock:
@@ -324,9 +351,9 @@ def _broadcast_ground(payload):
         for gid in dead:
             ground_connections.pop(gid, None)
 
-# =============================================================================
-# UDP discovery
-# =============================================================================
+
+# This listens on a UDP port so that new devices can discover the satellite
+# without needing to know the IP in advance
 def udp_discovery():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
         udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -349,9 +376,8 @@ def udp_discovery():
             except Exception:
                 pass
 
-# =============================================================================
-# Status printer
-# =============================================================================
+
+# This prints a summary of the satellite state every 20 seconds so we can see whats happening
 def status_printer():
     while True:
         time.sleep(20)
@@ -365,9 +391,7 @@ def status_printer():
             f"loss={stats['loss_pct']}% | avg_delay={stats['avg_delay_ms']}ms"
         )
 
-# =============================================================================
-# Entry point
-# =============================================================================
+
 def main():
     log.info("=" * 60)
     log.info(f"  LEO SATELLITE  -  {SATELLITE_ID}")
@@ -378,6 +402,7 @@ def main():
     log.info(f"  Channel         : realistic LEO simulation via channel.py")
     log.info("=" * 60)
 
+    # Start all the background services as daemon threads
     for svc in [turbine_listener, ground_listener, udp_discovery,
                 relay_loop, visibility_manager, status_printer]:
         threading.Thread(target=svc, daemon=True).start()
