@@ -1,4 +1,3 @@
-
 """
 channel.py
 Faster + demo-friendly LEO channel simulation
@@ -9,19 +8,17 @@ Faster + demo-friendly LEO channel simulation
 
 import time, random, threading
 
-# ==============================
-# DEMO-FRIENDLY SETTINGS
-# ==============================
 BASE_DELAY_MS = 120        # normal latency
 JITTER_MS     = 80         # random variation
-LOSS_PROB     = 0.03       # 3% packet loss
+LOSS_PROB     = 0.03       # 3% theoretical packet loss
 UP_TIME_S     = 45         # link stays up for 45 sec
 DOWN_TIME_S   = 8          # link down only 8 sec
 
 _link_up = True
 _stats = {
     "delay_samples": [],
-    "loss_pct": int(LOSS_PROB * 100),
+    "packets_total": 0,
+    "packets_lost": 0,
     "avg_delay_ms": BASE_DELAY_MS
 }
 _lock = threading.Lock()
@@ -38,7 +35,12 @@ def channel_delay():
         )
 
 def channel_loss():
-    return random.random() < LOSS_PROB
+    lost = random.random() < LOSS_PROB
+    with _lock:
+        _stats["packets_total"] += 1
+        if lost:
+            _stats["packets_lost"] += 1
+    return lost
 
 def is_link_up():
     return _link_up
@@ -53,10 +55,16 @@ def visibility_manager():
 
 def get_stats():
     with _lock:
+        total = _stats["packets_total"]
+        lost = _stats["packets_lost"]
+        actual_loss = round((lost / total) * 100, 2) if total > 0 else 0.0
+
         return {
-            "loss_pct": _stats["loss_pct"],
+            "loss_pct": actual_loss,
             "avg_delay_ms": _stats["avg_delay_ms"],
             "link_up": _link_up,
             "up_time_s": UP_TIME_S,
-            "down_time_s": DOWN_TIME_S
+            "down_time_s": DOWN_TIME_S,
+            "packets_total": total,
+            "packets_lost": lost
         }

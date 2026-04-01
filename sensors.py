@@ -22,6 +22,8 @@ import json, os, math, random, threading, hashlib
 from datetime import datetime
 from equipment import Rotor, Gearbox, Generator, Nacelle, HydraulicSystem
 
+_shared_wind = 12.0
+_shared_wind_lock = threading.Lock()
 # Path to dataset - looks for sensor_data.json in the project root
 _HERE      = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE  = os.path.join(_HERE, "sensor_data.json")
@@ -61,6 +63,12 @@ SENSOR_UNITS = {
     "aep_projection_mwh":  "MWh",
 }
 
+def _next_shared_wind():
+    global _shared_wind
+    with _shared_wind_lock:
+        _shared_wind += random.uniform(-0.4, 0.4)
+        _shared_wind = max(4.0, min(25.0, _shared_wind))
+        return round(_shared_wind, 2)
 
 class SensorSuite:
     """
@@ -82,6 +90,15 @@ class SensorSuite:
                 self.use_dataset = False
         else:
             self.use_dataset = use_dataset and os.path.exists(DATA_FILE)
+
+        tail = turbine_id.split("-")[-1]
+        tid_num = int(tail) if tail.isdigit() else 1
+        offset_map = {
+            1: -0.25,
+            2:  0.10,
+            3:  0.25,
+        }
+        self._wind_offset = offset_map.get(tid_num, 0.0)
 
         # equipment models (used in LIVE mode or to fill derived metrics)
         self.rotor      = Rotor()
@@ -105,6 +122,11 @@ class SensorSuite:
 
         # sequence counter
         self._seq = 0
+
+    def _farm_wind(self) -> float:
+        t_bucket = int(datetime.utcnow().timestamp() / 2)
+        base = 15.0 + 2.0 * math.sin(t_bucket / 12.0) + 0.6 * math.sin(t_bucket / 5.0)
+        return round(max(4.0, min(25.0, base)), 2)
 
     def next_reading(self, yaw: float = 180.0, pitch: float = 15.0) -> dict:
         """
@@ -163,7 +185,10 @@ class SensorSuite:
 
     def _live_reading(self, pitch: float) -> dict:
         """Generate a reading from the equipment models."""
-        wind = round(10.0 + random.gauss(0, 2.5), 2)
+        base_wind = self._farm_wind()
+        wind = round(base_wind + self._wind_offset + random.uniform(-0.15, 0.15), 2)
+        wind = max(4.0, min(25.0, wind))
+
         self.rotor.set_pitch(pitch)
         rpm  = self.rotor.rpm(wind)
         self.gearbox.update(rpm)
