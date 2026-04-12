@@ -1,18 +1,4 @@
-"""
-CSU33D03 - Main Project 2025-26
-GROUND CONTROL STATION  -  Device C
-
-This is the human operator side of the system. It connects to the satellite,
-receives live telemetry from wind turbines, displays their status, and lets
-the operator send control commands like changing yaw, pitch or triggering an
-emergency stop.
-
-Main features:
-- Checks message signatures before using incoming data.
-- Stores live telemetry for each turbine.
-- Sends commands like yaw, pitch, emergency stop, and resume.
-- Stops turbines automatically if wind or temperature becomes unsafe.
-"""
+"""Ground station program for viewing turbines and sending commands."""
 
 import socket, threading, time, json, logging, sys, os
 from datetime import datetime
@@ -21,8 +7,8 @@ from collections import defaultdict, deque
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from security import sign_message, verify_message, strip_security_fields
 
-# Use localhost for easy testing on one computer.
-# For two computers, set SATELLITE_HOST to the satellite computer IP address.
+# Use localhost when everything runs on one computer.
+# Change SATELLITE_HOST when the satellite is on another computer.
 SATELLITE_HOST = os.getenv("SATELLITE_HOST", "127.0.0.1")
 SATELLITE_PORT = int(os.getenv("SATELLITE_GROUND_PORT", "9001"))
 GROUND_ID      = os.getenv("GROUND_ID", "GROUND-CTRL-01")
@@ -41,9 +27,9 @@ ALERT_THRESHOLDS = {
     "nacelle_humidity":   {"min": 0,    "max": 85,   "unit": "%"},
 }
 
-WIND_RESUME_THRESHOLD = 20.0   # m/s — farm resumes below this after a wind estop
-TEMP_CRITICAL         = 65.0   # °C  — individual turbine auto estop
-TEMP_CLEAR            = 60.0   # °C  — temperature back to safe, clear the flag
+WIND_RESUME_THRESHOLD = 20.0   # resume farm below this wind speed
+TEMP_CRITICAL         = 65.0   # stop one turbine above this temperature
+TEMP_CLEAR            = 60.0   # resume when temperature is safe again
 
 logging.basicConfig(
     level=logging.INFO,
@@ -60,9 +46,9 @@ _sat_sock        = None
 _sock_lock       = threading.Lock()
 connected_to_sat = False
 
-# Track auto-stops so we don't spam commands every telemetry packet
-auto_estopped_temp = set()    # turbine IDs stopped due to temperature
-farm_wind_stopped  = False    # True when the whole farm was stopped for high wind
+# Track auto-stops so commands are not repeated every time.
+auto_estopped_temp = set()    # turbines stopped due to temperature
+farm_wind_stopped  = False    # whole farm stopped due to high wind
 
 _cmd_counter = 0
 _cmd_lock    = threading.Lock()
@@ -74,9 +60,6 @@ def _next_id():
         return f"CMD-{_cmd_counter:05d}"
 
 
-# ============================================================
-# OUTGOING MESSAGES
-# ============================================================
 
 def send_to_sat(msg):
     """Sign a message and send it to the satellite."""
@@ -111,11 +94,7 @@ def send_command(turbine_id, action, params):
 
 
 def send_all(action, params=None):
-    """
-    Broadcast the same command to ALL turbines via a single ALL-targeted message.
-    The satellite will fan it out to every connected turbine in one go, which
-    guarantees consistent state (e.g. all blades go to 90° on stopall).
-    """
+    """Send the same command to all turbines."""
     if params is None:
         params = {}
     if not connected_to_sat:
@@ -142,9 +121,6 @@ def ping():
     })
 
 
-# ============================================================
-# CONNECTION / RECEIVE LOOP
-# ============================================================
 
 def connect_loop():
     """Keep trying to connect to the satellite if the link drops."""
@@ -206,7 +182,7 @@ def _receive_loop(sock):
                 try:
                     raw_msg = json.loads(line)
 
-                    # verify_message returns a (bool, reason) tuple
+                    # Check the message before using it.
                     ok, reason = verify_message(raw_msg)
                     if not ok:
                         log.warning(f"Rejected satellite msg: {reason}")
@@ -224,9 +200,6 @@ def _receive_loop(sock):
             break
 
 
-# ============================================================
-# INCOMING MESSAGE HANDLERS
-# ============================================================
 
 def _dispatch(msg):
     """Send each incoming message type to the right handler."""
@@ -284,11 +257,7 @@ def _dispatch(msg):
 
 
 def _process_telemetry(msg):
-    """
-    Store flat per-turbine telemetry and check safety thresholds.
-    The satellite now sends one TELEMETRY message per turbine so there is
-    nothing nested to unpack here.
-    """
+    """Store turbine data and check for unsafe values."""
     global farm_wind_stopped
 
     tid     = msg.get("turbine_id", "?")
@@ -298,7 +267,7 @@ def _process_telemetry(msg):
         known_turbines[tid] = msg
         telemetry_history[tid].append(msg)
 
-    # General range alerts
+    # Print a warning if a sensor is outside the safe range.
     for sensor, th in ALERT_THRESHOLDS.items():
         val = sensors.get(sensor)
         if val is not None and (val < th["min"] or val > th["max"]):
@@ -307,21 +276,21 @@ def _process_telemetry(msg):
                 f"(safe range {th['min']} to {th['max']})"
             )
 
-    # Per-turbine auto e-stop on critical temperature (one-shot per turbine)
+    # Stop one turbine if its temperature is too high.
     temp = sensors.get("temperature", 0)
     if temp > TEMP_CRITICAL and tid not in auto_estopped_temp:
         log.warning(f"Critical temperature on {tid} ({temp}°C) -> EMERGENCY_STOP")
         send_command(tid, "EMERGENCY_STOP", {})
         auto_estopped_temp.add(tid)
 
-    # Clear temp flag when temperature has dropped back to safe
+    # Resume the turbine when the temperature becomes safe.
     if temp < TEMP_CLEAR:
         if tid in auto_estopped_temp:
             log.info(f"Temperature safe on {tid} ({temp}°C) -> RESUME")
             send_command(tid, "RESUME", {})
             auto_estopped_temp.discard(tid)
 
-    # Farm-wide wind check (guard: only the leader's reading is authoritative)
+    # The leader checks the wind for the whole farm.
     wind = sensors.get("wind_speed", 0)
     is_leader = msg.get("is_leader", False)
 
@@ -343,12 +312,7 @@ def _process_telemetry(msg):
 
 
 def _process_farm_alert(msg):
-    """
-    Handle a FARM_ALERT forwarded by the satellite.
-    The leader sends these when it detects extreme wind, and the satellite
-    forwards them with priority. We act on them even if we already triggered
-    the estop via telemetry (idempotent).
-    """
+    """Handle a high wind alert from the leader turbine."""
     global farm_wind_stopped
 
     alert_type = msg.get("alert_type", "")
@@ -369,9 +333,6 @@ def _process_farm_alert(msg):
         log.warning(f"Unknown FARM_ALERT type: {alert_type}")
 
 
-# ============================================================
-# DISPLAY / CLI
-# ============================================================
 
 def display_status():
     """Print the latest turbine values in the terminal."""
@@ -540,9 +501,6 @@ def cli():
             print(f"Unknown command: '{raw}'. Type 'help'.")
 
 
-# ============================================================
-# MAIN
-# ============================================================
 
 def main():
     log.info("=" * 55)

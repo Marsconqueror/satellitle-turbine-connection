@@ -64,9 +64,23 @@ The default farm list is `TURBINE-01`, `TURBINE-02`, and `TURBINE-03`.
 
 ## Running On Different Computers
 
-Find the IP address of the computer running `satellite.py`.
+You can also run the three parts on three different computers if all of them are on the same Wi-Fi or LAN.
 
-Then set `SATELLITE_HOST` before starting the turbine and ground station.
+Use the computers like this:
+
+- Computer 1 runs the satellite.
+- Computer 2 runs the turbine.
+- Computer 3 runs the ground station.
+
+First, find the IP address of Computer 1, because that is where `satellite.py` is running.
+
+On Computer 1:
+
+```bash
+python satellite/satellite.py
+```
+
+On Computer 2, set `SATELLITE_HOST` to Computer 1's IP address, then start the turbine.
 
 PowerShell example:
 
@@ -75,14 +89,22 @@ $env:SATELLITE_HOST="192.168.1.50"
 python turbine/turbine.py TURBINE-01
 ```
 
-In another terminal:
+On Computer 3, use the same satellite IP address, then start the ground station.
 
 ```powershell
 $env:SATELLITE_HOST="192.168.1.50"
 python ground_station/ground_station.py
 ```
 
-Use `127.0.0.1` when all programs run on the same computer.
+In this example, `192.168.1.50` is only an example. Replace it with the real IP address of the satellite computer.
+
+Use `127.0.0.1` only when all programs run on the same computer.
+
+If the computers cannot connect, check that:
+
+- all three computers are on the same network
+- the satellite program is running first
+- the firewall is not blocking ports `9000`, `9001`, and `9002`
 
 ## Files
 

@@ -1,18 +1,4 @@
-"""
-CSU33D03 - Main Project 2025-26
-TURBINE NODE  -  Dynamic collaborative version (leader-based)
-
-This script simulates an offshore wind turbine. One turbine acts as the LEADER
-(elected by best link quality) and sends aggregated telemetry for the farm to
-the satellite. Other turbines act as followers but still expose their own sensors
-and can receive commands individually.
-
-Main features:
-- Sends telemetry to the satellite.
-- Receives yaw, pitch, stop, and resume commands.
-- Elects one turbine as the leader using simulated link quality.
-- Sends a farm alert when wind becomes unsafe.
-"""
+"""Turbine program that sends sensor data and receives commands."""
 
 import socket, threading, time, random, json, logging, sys, os
 from datetime import datetime
@@ -21,22 +7,16 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from security import sign_message, verify_message, strip_security_fields
 from sensors import SensorSuite
 
-# =========================================================
-# NETWORK SETTINGS
-# =========================================================
-# Use localhost for running everything on one computer.
-# For a real network test, set SATELLITE_HOST to the satellite computer IP.
+# Use localhost when everything runs on one computer.
+# Change SATELLITE_HOST when the satellite is on another computer.
 SATELLITE_HOST = os.getenv("SATELLITE_HOST", "127.0.0.1")
 SATELLITE_PORT = int(os.getenv("SATELLITE_TURBINE_PORT", "9000"))
 
 RECONNECT_DELAY  = 5
 SENSOR_INTERVAL  = 2
-WIND_ESTOP_LIMIT = 25.0   # m/s — leader broadcasts FARM_ALERT above this
+WIND_ESTOP_LIMIT = 25.0   # stop farm above this wind speed
 
-# =========================================================
-# TURBINE IDENTITY
 # Argv: python turbine.py <TURBINE-ID> [BASE_PORT] [T1,T2,T3,...]
-# =========================================================
 TURBINE_ID = sys.argv[1] if len(sys.argv) > 1 else "TURBINE-01"
 
 BASE_PORT = int(sys.argv[2]) if len(sys.argv) > 2 else (
@@ -44,10 +24,7 @@ BASE_PORT = int(sys.argv[2]) if len(sys.argv) > 2 else (
     if TURBINE_ID.split("-")[-1].isdigit() else 5001
 )
 
-# Allow passing the full farm list as a third argument so any number of turbines
-# can participate without editing this file.
-# e.g.  python turbine.py TURBINE-01 5010 TURBINE-01,TURBINE-02,TURBINE-03,TURBINE-04
-# Can also be set via env var: FARM_TURBINES=TURBINE-01,TURBINE-02,...
+# Farm list can come from the command line or FARM_TURBINES.
 if len(sys.argv) > 3:
     ALL_TURBINES = sys.argv[3].split(",")
 elif os.getenv("FARM_TURBINES"):
@@ -55,11 +32,7 @@ elif os.getenv("FARM_TURBINES"):
 else:
     ALL_TURBINES = ["TURBINE-01", "TURBINE-02", "TURBINE-03"]
 
-# =========================================================
-# DYNAMIC LEADER ELECTION  (best link quality wins)
-# =========================================================
-# Each turbine measures its own link quality independently in a real system.
-# Here we simulate it with a fixed table that can be extended as ALL_TURBINES grows.
+# The turbine with the best fake link quality becomes leader.
 _BASE_LINK_QUALITY = {
     "TURBINE-01": {"avg_delay_ms": 140, "loss_pct": 2.8},
     "TURBINE-02": {"avg_delay_ms": 120, "loss_pct": 1.8},
@@ -69,7 +42,7 @@ _BASE_LINK_QUALITY = {
 }
 
 def _default_link(tid):
-    """Generate plausible link stats for turbines not in the table."""
+    """Make simple link values for a new turbine."""
     seed = sum(ord(c) for c in tid)
     rng  = random.Random(seed)
     return {"avg_delay_ms": rng.randint(100, 180), "loss_pct": round(rng.uniform(1.5, 4.5), 1)}
@@ -80,11 +53,11 @@ SIMULATED_LINK_QUALITY = {
 }
 
 def compute_leader_score(delay_ms, loss_pct):
-    """Higher score means a better turbine to act as leader."""
+    """Give a higher score to a better link."""
     return round(1000 - (delay_ms * 2) - (loss_pct * 100), 2)
 
 def elect_leader():
-    """Pick the turbine with the best simulated link quality."""
+    """Pick the best turbine as leader."""
     best_tid   = None
     best_score = -999999
     for tid in ALL_TURBINES:
@@ -99,22 +72,15 @@ LEADER_ID, LEADER_SCORE = elect_leader()
 IS_LEADER = (TURBINE_ID == LEADER_ID)
 FOLLOWERS = [tid for tid in ALL_TURBINES if tid != LEADER_ID]
 
-# =========================================================
-# SENSOR SUITES
-# One SensorSuite for this turbine; one per follower so each
-# gets independent, physically-consistent readings.
-# =========================================================
+# One sensor suite is used for each turbine.
 _local_suite = SensorSuite(turbine_id=TURBINE_ID)
 _follower_suites = {tid: SensorSuite(turbine_id=tid) for tid in FOLLOWERS}
-# Tracks last-known actuator/status state for each follower (updated on ACK or command)
+# Store the last state for follower turbines.
 _follower_states = {
     tid: {"yaw_angle": 180.0, "blade_pitch": 15.0, "emergency_stop": False, "online": True}
     for tid in FOLLOWERS
 }
 
-# =========================================================
-# SENSOR PORTS
-# =========================================================
 SENSOR_NAMES = ["wind_speed", "power_output", "rotor_rpm", "temperature"]
 SENSOR_PORTS = {name: BASE_PORT + i + 1 for i, name in enumerate(SENSOR_NAMES)}
 SENSOR_UNITS = {
@@ -124,9 +90,6 @@ SENSOR_UNITS = {
     "temperature":  "°C"
 }
 
-# =========================================================
-# LOGGING
-# =========================================================
 logging.basicConfig(
     level=logging.INFO,
     format=f"%(asctime)s [{TURBINE_ID}] %(levelname)s - %(message)s",
@@ -134,9 +97,6 @@ logging.basicConfig(
 )
 log = logging.getLogger(TURBINE_ID)
 
-# =========================================================
-# TURBINE STATE
-# =========================================================
 state = {
     "yaw_angle":      180.0,
     "blade_pitch":    15.0,
@@ -145,15 +105,12 @@ state = {
 }
 state_lock = threading.Lock()
 
-# Track whether we already sent a farm-level wind alert so we don't spam
+# Remember if a wind alert was already sent.
 _wind_alert_sent = False
 _wind_alert_lock = threading.Lock()
 
-# =========================================================
-# SENSOR READERS
-# =========================================================
 def read_wind_speed():
-    """Return a simple wind speed value for the small sensor server."""
+    """Return a wind speed value."""
     return round(12.0 + random.gauss(0, 2.5), 2)
 
 def read_power_output():
@@ -162,7 +119,7 @@ def read_power_output():
     return round(min(2000.0, max(0.0, 0.5 * 1.225 * 3.14159 * (40**2) * (ws**3) / 1000)), 1)
 
 def read_rotor_rpm():
-    """Return rotor speed, or zero when emergency stop is active."""
+    """Return rotor speed."""
     with state_lock:
         pitch = state["blade_pitch"]
         estop = state["emergency_stop"]
@@ -181,11 +138,9 @@ READERS = {
     "temperature":  read_temperature,
 }
 
-# =========================================================
 # SENSOR TCP SERVERS  (individual sensor ports)
-# =========================================================
 def sensor_server(name, port):
-    """Start a tiny TCP server for one sensor value."""
+    """Start a TCP server for one sensor."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", port))
@@ -216,17 +171,14 @@ def _handle_sensor(conn, name):
         except Exception:
             pass
 
-# =========================================================
-# TELEMETRY BUILDERS
-# =========================================================
 def build_local_telemetry():
-    """Build a single TELEMETRY message for this turbine, including derived metrics."""
+    """Build telemetry for this turbine."""
     with state_lock:
         s = dict(state)
     reading = _local_suite.next_reading(yaw=s["yaw_angle"], pitch=s["blade_pitch"])
     sensors = reading["sensors"]
     derived = reading["derived"]
-    # Emergency stop overrides RPM
+    # Stop means the rotor is not moving.
     if s["emergency_stop"]:
         sensors["rotor_rpm"] = 0.0
     return {
@@ -250,11 +202,7 @@ def build_local_telemetry():
     }
 
 def build_follower_telemetry(tid):
-    """
-    Leader relays each follower's data using its own SensorSuite so readings
-    are physically consistent and reflect any commands sent to that follower.
-    Follower actuator/status state is tracked in _follower_states.
-    """
+    """Build telemetry for a follower turbine."""
     fstate = _follower_states.get(tid, {"yaw_angle": 180.0, "blade_pitch": 15.0,
                                         "emergency_stop": False, "online": True})
     suite   = _follower_suites[tid]
@@ -282,11 +230,8 @@ def build_follower_telemetry(tid):
         },
     }
 
-# =========================================================
-# COMMAND HANDLER
-# =========================================================
 def _apply_state_change(action, params, s):
-    """Apply a single action to a state dict (in-place). Returns (success, message)."""
+    """Apply one command to a turbine state."""
     if action == "SET_YAW":
         angle = max(0.0, min(360.0, float(params.get("angle", s["yaw_angle"]))))
         s["yaw_angle"] = angle
@@ -317,7 +262,7 @@ def apply_command(cmd):
     success = True
     message = "OK"
 
-    # Apply to this turbine's own state
+    # Apply the command to this turbine.
     with state_lock:
         try:
             success, message = _apply_state_change(action, params, state)
@@ -329,9 +274,7 @@ def apply_command(cmd):
             success = False
             message = f"Command error: {e}"
 
-    # If this turbine is the leader and the command was broadcast to ALL,
-    # also mirror the state change into all follower shadow states so
-    # build_follower_telemetry() reflects the correct pitch/estop.
+    # If the command is for all turbines, update follower states too.
     if IS_LEADER and target == "ALL":
         for tid, fstate in _follower_states.items():
             try:
@@ -348,11 +291,8 @@ def apply_command(cmd):
         "timestamp":  datetime.utcnow().isoformat() + "Z",
     }
 
-# =========================================================
-# SATELLITE LINK
-# =========================================================
 def satellite_link():
-    """Connect to the satellite and exchange telemetry and commands."""
+    """Connect to the satellite."""
     global _wind_alert_sent
 
     while True:
@@ -384,21 +324,21 @@ def satellite_link():
                 while True:
                     now = time.time()
 
-                    # ---- Periodic telemetry transmission ----
+                    # Send telemetry every few seconds.
                     if now - last_tx >= SENSOR_INTERVAL:
                         last_tx = now
 
-                        # Always send our own telemetry
+                        # Send this turbine's data.
                         local = build_local_telemetry()
                         sock.sendall((json.dumps(sign_message(local)) + "\n").encode())
 
-                        # Leader additionally relays all follower telemetry
+                        # The leader also sends follower data.
                         if IS_LEADER:
                             for tid in FOLLOWERS:
                                 follower_msg = build_follower_telemetry(tid)
                                 sock.sendall((json.dumps(sign_message(follower_msg)) + "\n").encode())
 
-                            # Check for farm-wide high wind and send a FARM_ALERT
+                            # Send an alert if wind is too high.
                             wind = local["sensors"]["wind_speed"]
                             with _wind_alert_lock:
                                 if wind > WIND_ESTOP_LIMIT and not _wind_alert_sent:
@@ -418,10 +358,10 @@ def satellite_link():
                                     )
                                     _wind_alert_sent = True
                                 elif wind <= WIND_ESTOP_LIMIT * 0.85:
-                                    # Wind has dropped back to safe range — allow future alerts
+                                    # Allow a new alert after wind becomes safe.
                                     _wind_alert_sent = False
 
-                    # ---- Receive commands / ACKs ----
+                    # Read commands from the satellite.
                     try:
                         chunk = sock.recv(4096).decode()
                         if not chunk:

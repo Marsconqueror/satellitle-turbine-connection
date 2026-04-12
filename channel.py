@@ -1,14 +1,8 @@
-"""
-channel.py
-Faster + demo-friendly LEO channel simulation
-- shorter delays
-- link UP most of the time
-- brief outages instead of long ones
-"""
+"""Small satellite channel simulation."""
 
 import time, random, threading
 
-# These values make the simulated satellite link feel realistic but still quick.
+# Basic values for the fake satellite link.
 BASE_DELAY_MS = 120        # normal latency
 JITTER_MS     = 80         # random variation
 LOSS_PROB     = 0.03       # 3% theoretical packet loss
@@ -16,7 +10,7 @@ UP_TIME_S     = 45         # link stays up for 45 sec
 DOWN_TIME_S   = 8          # link down only 8 sec
 
 _link_up = True
-# Shared channel statistics used by the satellite status screen.
+# Values shown in satellite status.
 _stats = {
     "delay_samples": [],
     "packets_total": 0,
@@ -26,7 +20,7 @@ _stats = {
 _lock = threading.Lock()
 
 def channel_delay():
-    """Sleep for a short simulated satellite delay."""
+    """Add a small delay like a satellite link."""
     delay_ms = BASE_DELAY_MS + random.randint(0, JITTER_MS)
     time.sleep(delay_ms / 1000.0)
     with _lock:
@@ -38,7 +32,7 @@ def channel_delay():
         )
 
 def channel_loss():
-    """Randomly decide whether a packet is lost."""
+    """Randomly drop some packets."""
     lost = random.random() < LOSS_PROB
     with _lock:
         _stats["packets_total"] += 1
@@ -47,11 +41,11 @@ def channel_loss():
     return lost
 
 def is_link_up():
-    """Return whether the satellite link is currently visible."""
+    """Check if the link is up."""
     return _link_up
 
 def visibility_manager():
-    """Switch the simulated link between up and down windows."""
+    """Switch the link between up and down."""
     global _link_up
     while True:
         _link_up = True
@@ -60,7 +54,7 @@ def visibility_manager():
         time.sleep(DOWN_TIME_S)
 
 def get_stats():
-    """Return the latest delay and packet-loss statistics."""
+    """Return simple channel statistics."""
     with _lock:
         total = _stats["packets_total"]
         lost = _stats["packets_lost"]

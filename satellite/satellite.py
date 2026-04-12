@@ -1,17 +1,4 @@
-"""
-CSU33D03 - Main Project 2025-26
-LEO SATELLITE RELAY  -  Device B
-
-This script acts as the satellite relay sitting between the wind turbine
-and the ground control station. It simulates a real Low Earth Orbit satellite
-by adding realistic communication delays, packet loss, and visibility windows.
-
-Main features:
-- Accepts turbine and ground station connections.
-- Relays turbine telemetry to the ground station.
-- Routes ground station commands back to turbines.
-- Simulates satellite delay, packet loss, and link visibility.
-"""
+"""Satellite relay between the turbine and ground station."""
 
 import socket, threading, time, random, json, logging, sys, os, queue
 from datetime import datetime
@@ -45,11 +32,8 @@ _seq_tracker = {}
 _stats_lock  = threading.Lock()
 
 
-# ============================================================
-# TURBINE LISTENER
-# ============================================================
 def turbine_listener():
-    """Listen for turbine TCP connections."""
+    """Wait for turbine connections."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", TURBINE_LISTEN_PORT))
@@ -62,7 +46,7 @@ def turbine_listener():
 
 
 def handle_turbine(conn, addr):
-    """Handle one connected turbine."""
+    """Receive messages from one turbine."""
     turbine_id = None
     buffer     = ""
     try:
@@ -109,10 +93,10 @@ def handle_turbine(conn, addr):
                         conn.sendall((json.dumps(ack) + "\n").encode())
 
                     elif t == "TELEMETRY":
-                        # Each message is now a flat per-turbine payload — forward as-is.
+                        # Forward one turbine telemetry message.
                         _track_seq(msg)
                         if not is_link_up() or channel_loss():
-                            pass  # drop on simulated loss (still drain the command queue below)
+                            pass  # drop packet during simulated loss
                         else:
                             msg["relayed_by"]      = SATELLITE_ID
                             msg["relay_timestamp"] = datetime.utcnow().isoformat() + "Z"
@@ -122,7 +106,7 @@ def handle_turbine(conn, addr):
                                 log.warning("Relay queue full - dropping telemetry")
 
                     elif t == "FARM_ALERT":
-                        # Safety-critical: forward immediately, bypass channel loss simulation.
+                        # Forward important farm alerts without dropping them.
                         msg["relayed_by"]      = SATELLITE_ID
                         msg["relay_timestamp"] = datetime.utcnow().isoformat() + "Z"
                         log.warning(
@@ -132,7 +116,7 @@ def handle_turbine(conn, addr):
                         try:
                             relay_queue.put_nowait(json.dumps(sign_message(msg)))
                         except queue.Full:
-                            # Priority: clear a slot and insert
+                            # Clear one old item if the queue is full.
                             try:
                                 relay_queue.get_nowait()
                             except queue.Empty:
@@ -154,7 +138,7 @@ def handle_turbine(conn, addr):
                         })
                         _broadcast_ground(json.dumps(beacon))
 
-                    # Drain any queued commands for this turbine
+                    # Send any commands waiting for this turbine.
                     if turbine_id:
                         cq = command_queue[turbine_id]
                         while not cq.empty():
@@ -173,7 +157,7 @@ def handle_turbine(conn, addr):
 
 
 def _track_seq(msg):
-    """Track sequence numbers so missing telemetry can be logged."""
+    """Check if telemetry packets were missed."""
     tid = msg.get("turbine_id")
     seq = msg.get("seq")
     if not tid or seq is None:
@@ -190,11 +174,8 @@ def _track_seq(msg):
         _seq_tracker[tid] = seq
 
 
-# ============================================================
-# GROUND LISTENER
-# ============================================================
 def ground_listener():
-    """Listen for ground station TCP connections."""
+    """Wait for ground station connections."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", GROUND_LISTEN_PORT))
@@ -207,7 +188,7 @@ def ground_listener():
 
 
 def handle_ground(conn, addr):
-    """Handle one connected ground station."""
+    """Receive messages from one ground station."""
     ground_id = None
     buffer    = ""
     try:
@@ -289,7 +270,7 @@ def handle_ground(conn, addr):
 
 
 def _route_command(conn, msg):
-    """Send a ground command to the correct turbine."""
+    """Route a command to a turbine."""
     target = msg.get("turbine_id")
     msg["routed_via"]      = SATELLITE_ID
     msg["route_timestamp"] = datetime.utcnow().isoformat() + "Z"
@@ -297,12 +278,12 @@ def _route_command(conn, msg):
     queued  = not is_link_up() or channel_loss()
 
     if target == "ALL":
-        # Broadcast to every connected turbine
+        # Send to every connected turbine.
         with t_lock:
             targets = list(turbine_connections.keys())
         for tid in targets:
             _deliver_or_queue(tid, payload, queued)
-        queued = False  # at least attempted delivery
+        queued = False
     else:
         _deliver_or_queue(target, payload, queued)
 
@@ -321,7 +302,7 @@ def _route_command(conn, msg):
 
 
 def _deliver_or_queue(target, payload, queued):
-    """Deliver a command now, or store it until the turbine is reachable."""
+    """Send a command now or save it for later."""
     if queued:
         command_queue[target].put(payload)
         log.warning(f"Command queued for {target}")
@@ -340,7 +321,7 @@ def _deliver_or_queue(target, payload, queued):
 
 
 def _send_status(conn):
-    """Send basic satellite status back to the ground station."""
+    """Send satellite status to the ground station."""
     with t_lock: tc = len(turbine_connections)
     with g_lock: gc = len(ground_connections)
     stats = get_stats()
@@ -360,11 +341,8 @@ def _send_status(conn):
         pass
 
 
-# ============================================================
-# RELAY & BROADCAST
-# ============================================================
 def relay_loop():
-    """Move telemetry messages from the relay queue to ground stations."""
+    """Forward queued telemetry to ground stations."""
     while True:
         try:
             payload = relay_queue.get(timeout=1)
@@ -374,7 +352,7 @@ def relay_loop():
 
 
 def _broadcast_ground(payload):
-    """Send one message to every connected ground station."""
+    """Send one message to all ground stations."""
     channel_delay()
     with g_lock:
         dead = []
@@ -387,11 +365,8 @@ def _broadcast_ground(payload):
             ground_connections.pop(gid, None)
 
 
-# ============================================================
-# UDP DISCOVERY
-# ============================================================
 def udp_discovery():
-    """Reply to simple UDP discovery requests."""
+    """Reply to UDP discovery requests."""
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
         udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         udp.bind(("0.0.0.0", DISCOVERY_UDP_PORT))
@@ -414,11 +389,8 @@ def udp_discovery():
                 pass
 
 
-# ============================================================
-# STATUS PRINTER
-# ============================================================
 def status_printer():
-    """Print a short satellite status line every few seconds."""
+    """Print satellite status sometimes."""
     while True:
         time.sleep(20)
         with t_lock: tc = len(turbine_connections)

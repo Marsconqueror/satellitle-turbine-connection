@@ -1,22 +1,4 @@
-"""
-CSU33D03 - Main Project 2025-26
-Group 9 - Sensor Layer
-
-Provides all sensor readings for the turbine node.
-Two modes:
-  - DATASET MODE (default): replays sensor_data.json row by row
-  - LIVE MODE: uses equipment.py models to compute readings in real time
-
-All readings are exposed through a single SensorSuite object.
-The turbine only needs to call suite.next_reading() each interval.
-
-Usage in turbine.py:
-    import sys, os
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-    from sensors import SensorSuite
-    suite = SensorSuite(turbine_id="TURBINE-01")
-    reading = suite.next_reading(yaw=180.0, pitch=15.0)
-"""
+"""Sensor code for making turbine readings."""
 
 import json, os, math, random, threading, hashlib
 from datetime import datetime
@@ -24,11 +6,11 @@ from equipment import Rotor, Gearbox, Generator, Nacelle, HydraulicSystem
 
 _shared_wind = 12.0
 _shared_wind_lock = threading.Lock()
-# Path to dataset - looks for sensor_data.json in the project root
+# Optional sensor data file in the project root.
 _HERE      = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE  = os.path.join(_HERE, "sensor_data.json")
 
-# Alert thresholds - ground station uses these too
+# Safe ranges for sensor values.
 ALERT_THRESHOLDS = {
     "wind_speed":          {"min": 0,    "max": 25,   "unit": "m/s"},
     "power_output":        {"min": 0,    "max": 2000, "unit": "kW"},
@@ -64,7 +46,7 @@ SENSOR_UNITS = {
 }
 
 def _next_shared_wind():
-    """Move the shared wind value slowly so readings do not jump too much."""
+    """Move wind slowly so values do not jump."""
     global _shared_wind
     with _shared_wind_lock:
         _shared_wind += random.uniform(-0.4, 0.4)
@@ -72,21 +54,15 @@ def _next_shared_wind():
         return round(_shared_wind, 2)
 
 class SensorSuite:
-    """
-    Unified sensor interface for a turbine node.
-    Wraps either the JSON dataset or live equipment models.
-    """
+    """Create sensor readings for one turbine."""
 
     def __init__(self, turbine_id: str = "TURBINE-01", use_dataset: bool = False):
         self.turbine_id  = turbine_id
-        # Priority for selecting mode:
-        # 1. Environment variable SENSORS_MODE ("live" or "dataset")
-        # 2. explicit use_dataset argument
-        # 3. presence of DATA_FILE
+        # Pick dataset mode only when it is requested and the file exists.
         env_mode = os.getenv("SENSORS_MODE")
         if env_mode:
             self.use_dataset = False if env_mode.lower() == "live" else True
-            # if dataset requested but file not present, fall back to live
+            # Use live mode if the dataset file is missing.
             if self.use_dataset and not os.path.exists(DATA_FILE):
                 self.use_dataset = False
         else:
@@ -101,14 +77,14 @@ class SensorSuite:
         }
         self._wind_offset = offset_map.get(tid_num, 0.0)
 
-        # equipment models (used in LIVE mode or to fill derived metrics)
+        # Equipment objects used to create live readings.
         self.rotor      = Rotor()
         self.gearbox    = Gearbox()
         self.generator  = Generator()
         self.nacelle    = Nacelle()
         self.hydraulics = HydraulicSystem()
 
-        # dataset replay
+        # Dataset replay state.
         self._dataset   = []
         self._index     = 0
         self._lock      = threading.Lock()
@@ -121,11 +97,11 @@ class SensorSuite:
             print("[SENSORS] sensor_data.json not found - using live equipment models")
             self.use_dataset = False
 
-        # sequence counter
+        # Message counter.
         self._seq = 0
 
     def _farm_wind(self) -> float:
-        """Create a smooth wind value for the simulated farm."""
+        """Create smooth wind for the farm."""
         t_bucket = int(datetime.utcnow().timestamp() / 2)
         base = 15.0 + 2.0 * math.sin(t_bucket / 12.0) + 0.6 * math.sin(t_bucket / 5.0)
         return round(max(4.0, min(25.0, base)), 2)
@@ -144,7 +120,7 @@ class SensorSuite:
         else:
             raw = self._live_reading(pitch)
 
-        # apply actuator state to affected sensors
+        # Apply yaw and pitch before final values are returned.
         self.rotor.set_pitch(pitch)
         self.nacelle.set_yaw(yaw)
         wind = raw["wind_speed"]
@@ -181,13 +157,13 @@ class SensorSuite:
         }
 
     def _next_dataset_row(self) -> dict:
-        """Return the next row from the JSON dataset."""
+        """Return the next dataset row."""
         row = self._dataset[self._index]
         self._index = (self._index + 1) % len(self._dataset)
         return row
 
     def _live_reading(self, pitch: float) -> dict:
-        """Generate a reading from the equipment models."""
+        """Create one live sensor reading."""
         base_wind = self._farm_wind()
         wind = round(base_wind + self._wind_offset + random.uniform(-0.15, 0.15), 2)
         wind = max(4.0, min(25.0, wind))
@@ -209,7 +185,7 @@ class SensorSuite:
         }
 
     def get_single(self, sensor_name: str, yaw: float = 180.0, pitch: float = 15.0):
-        """Read one sensor by name - used by the per-sensor TCP servers."""
+        """Read one sensor by name."""
         reading = self.next_reading(yaw, pitch)
         val = reading["sensors"].get(sensor_name) or reading["derived"].get(sensor_name)
         return {

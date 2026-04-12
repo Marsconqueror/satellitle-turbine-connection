@@ -27,6 +27,27 @@ For local testing, the turbine and ground station use `127.0.0.1`.
 
 For network testing, set `SATELLITE_HOST` to the satellite computer IP address.
 
+## Why TCP And UDP Are Both Used
+
+This project uses TCP for the main communication.
+
+TCP is used for:
+
+- turbine sensor data going to the satellite
+- satellite data going to the ground station
+- ground station commands going back to the turbine
+
+TCP was chosen for these messages because the connection is more reliable. Commands like `EMERGENCY_STOP`, `SET_YAW`, and `SET_PITCH` should not be lost easily.
+
+UDP is only used for simple discovery on port `9002`.
+
+UDP was chosen for discovery because it is lightweight. A small discovery message can be sent without opening a full TCP connection first. If a UDP discovery message is missed, the program can just try again.
+
+So the simple idea is:
+
+- TCP is used for important messages after the devices are connected.
+- UDP is used for quick discovery messages.
+
 ## Message Types
 
 `REGISTER`

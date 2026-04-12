@@ -1,25 +1,15 @@
-"""
-CSU33D03 - Main Project 2025-26
-Group 9 - Security Layer
-
-HMAC-SHA256 message signing and replay attack prevention.
-Sits in the project root, imported by all three nodes.
-
-    import sys, os
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-    from security import sign_message, verify_message, strip_security_fields
-"""
+"""Simple message signing used by all nodes."""
 
 import hmac, hashlib, json, time
 
-# Shared secret for this demo. All three programs must use the same value.
+# All programs use the same secret key.
 HMAC_SECRET   = b"csu33d03-group9-arklow-2026"
 HMAC_FIELD    = "sig"
 REPLAY_WINDOW = 30   # seconds - reject messages older than this
 
 
 def sign_message(msg: dict) -> dict:
-    """Add HMAC-SHA256 signature + timestamp. Call before every send."""
+    """Add a timestamp and signature before sending."""
     msg.pop(HMAC_FIELD, None)
     msg["sent_at"] = time.time()
     payload = json.dumps(msg, sort_keys=True, separators=(",", ":"))
@@ -28,10 +18,7 @@ def sign_message(msg: dict) -> dict:
 
 
 def verify_message(msg: dict) -> tuple:
-    """
-    Verify signature and freshness of an incoming message.
-    Returns (True, "") or (False, reason_string).
-    """
+    """Check if a message is signed and recent."""
     received_sig = msg.get(HMAC_FIELD)
     if not received_sig:
         return False, "missing signature"
@@ -57,7 +44,7 @@ def verify_message(msg: dict) -> tuple:
 
 
 def strip_security_fields(msg: dict) -> dict:
-    """Remove sig and sent_at before passing to application logic."""
+    """Remove security fields before normal processing."""
     clean = dict(msg)
     clean.pop(HMAC_FIELD, None)
     clean.pop("sent_at", None)
