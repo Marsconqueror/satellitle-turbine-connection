@@ -95,6 +95,7 @@ class Gearbox:
         self._temp_c += random.gauss(0, 0.3)
 
     def temperature(self) -> float:
+        """Return the current gearbox temperature."""
         return round(self._temp_c, 1)
 
     def oil_pressure_bar(self) -> float:
@@ -107,6 +108,7 @@ class Gearbox:
         return round(max(0.88, 0.98 - self._wear * 0.08), 3)
 
     def age(self, hours: float = 1.0):
+        """Add a small amount of gearbox wear."""
         self._wear    = min(1.0, self._wear    + hours * 0.0000015)
         self._oil_degr = min(1.0, self._oil_degr + hours * 0.000005)
 
@@ -132,6 +134,7 @@ class Generator:
         self._temp_c += random.gauss(0, 0.8)
 
     def temperature(self) -> float:
+        """Return the current generator temperature."""
         return round(self._temp_c, 1)
 
     def power_output_kw(self, wind_speed: float) -> float:
@@ -142,6 +145,7 @@ class Generator:
         return round(min(self.RATED_KW, max(0.0, raw * self._efficiency)), 1)
 
     def capacity_factor(self, wind_speed: float) -> float:
+        """Return output as a fraction of rated power."""
         return round(self.power_output_kw(wind_speed) / self.RATED_KW, 3)
 
     def aep_projection_mwh(self, wind_speed: float) -> float:
@@ -149,6 +153,7 @@ class Generator:
         return round(self.power_output_kw(wind_speed) * 8760 / 1000, 1)
 
     def age(self, hours: float = 1.0):
+        """Add a small amount of generator wear."""
         self._wear       = min(1.0, self._wear + hours * 0.000001)
         self._efficiency = max(0.88, 0.96 - self._wear * 0.06)
 
@@ -164,6 +169,7 @@ class Nacelle:
         self._vib       = 1.2     # structural vibration mm/s
 
     def set_yaw(self, degrees: float):
+        """Set nacelle direction between 0 and 360 degrees."""
         self.yaw_angle = max(0.0, min(360.0, degrees))
 
     def humidity(self) -> float:
@@ -205,9 +211,11 @@ class HydraulicSystem:
         self._pressure  = max(self.MIN_BAR, min(self.MAX_BAR, self._pressure))
 
     def pressure(self) -> float:
+        """Return current hydraulic pressure."""
         return round(self._pressure, 1)
 
     def health(self) -> str:
+        """Return a simple health label based on pressure."""
         if self._pressure < 130.0:  return "CRITICAL"
         if self._pressure < 150.0:  return "WARNING"
         return "OK"

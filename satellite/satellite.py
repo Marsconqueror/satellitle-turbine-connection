@@ -6,10 +6,11 @@ This script acts as the satellite relay sitting between the wind turbine
 and the ground control station. It simulates a real Low Earth Orbit satellite
 by adding realistic communication delays, packet loss, and visibility windows.
 
-Key fixes vs original:
-- Telemetry is now a flat per-turbine message so no unpacking needed.
-- New FARM_ALERT message type is forwarded to ground immediately (no loss check)
-  so the ground station can act on it even during simulated link degradation.
+Main features:
+- Accepts turbine and ground station connections.
+- Relays turbine telemetry to the ground station.
+- Routes ground station commands back to turbines.
+- Simulates satellite delay, packet loss, and link visibility.
 """
 
 import socket, threading, time, random, json, logging, sys, os, queue
@@ -48,6 +49,7 @@ _stats_lock  = threading.Lock()
 # TURBINE LISTENER
 # ============================================================
 def turbine_listener():
+    """Listen for turbine TCP connections."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", TURBINE_LISTEN_PORT))
@@ -60,6 +62,7 @@ def turbine_listener():
 
 
 def handle_turbine(conn, addr):
+    """Handle one connected turbine."""
     turbine_id = None
     buffer     = ""
     try:
@@ -170,6 +173,7 @@ def handle_turbine(conn, addr):
 
 
 def _track_seq(msg):
+    """Track sequence numbers so missing telemetry can be logged."""
     tid = msg.get("turbine_id")
     seq = msg.get("seq")
     if not tid or seq is None:
@@ -190,6 +194,7 @@ def _track_seq(msg):
 # GROUND LISTENER
 # ============================================================
 def ground_listener():
+    """Listen for ground station TCP connections."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", GROUND_LISTEN_PORT))
@@ -202,6 +207,7 @@ def ground_listener():
 
 
 def handle_ground(conn, addr):
+    """Handle one connected ground station."""
     ground_id = None
     buffer    = ""
     try:
@@ -283,6 +289,7 @@ def handle_ground(conn, addr):
 
 
 def _route_command(conn, msg):
+    """Send a ground command to the correct turbine."""
     target = msg.get("turbine_id")
     msg["routed_via"]      = SATELLITE_ID
     msg["route_timestamp"] = datetime.utcnow().isoformat() + "Z"
@@ -314,6 +321,7 @@ def _route_command(conn, msg):
 
 
 def _deliver_or_queue(target, payload, queued):
+    """Deliver a command now, or store it until the turbine is reachable."""
     if queued:
         command_queue[target].put(payload)
         log.warning(f"Command queued for {target}")
@@ -332,6 +340,7 @@ def _deliver_or_queue(target, payload, queued):
 
 
 def _send_status(conn):
+    """Send basic satellite status back to the ground station."""
     with t_lock: tc = len(turbine_connections)
     with g_lock: gc = len(ground_connections)
     stats = get_stats()
@@ -355,6 +364,7 @@ def _send_status(conn):
 # RELAY & BROADCAST
 # ============================================================
 def relay_loop():
+    """Move telemetry messages from the relay queue to ground stations."""
     while True:
         try:
             payload = relay_queue.get(timeout=1)
@@ -364,6 +374,7 @@ def relay_loop():
 
 
 def _broadcast_ground(payload):
+    """Send one message to every connected ground station."""
     channel_delay()
     with g_lock:
         dead = []
@@ -380,6 +391,7 @@ def _broadcast_ground(payload):
 # UDP DISCOVERY
 # ============================================================
 def udp_discovery():
+    """Reply to simple UDP discovery requests."""
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp:
         udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         udp.bind(("0.0.0.0", DISCOVERY_UDP_PORT))
@@ -406,6 +418,7 @@ def udp_discovery():
 # STATUS PRINTER
 # ============================================================
 def status_printer():
+    """Print a short satellite status line every few seconds."""
     while True:
         time.sleep(20)
         with t_lock: tc = len(turbine_connections)

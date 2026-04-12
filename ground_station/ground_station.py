@@ -7,13 +7,11 @@ receives live telemetry from wind turbines, displays their status, and lets
 the operator send control commands like changing yaw, pitch or triggering an
 emergency stop.
 
-Key fixes vs original:
-- verify_message() now correctly handled as a tuple (ok, reason).
-- Telemetry is flat per-turbine messages - no self/relay_data unpacking needed.
-- FARM_ALERT handler: automatically e-stops ALL turbines on high wind reported
-  by the leader, then resumes once wind is back in range.
-- Auto e-stop on critical temperature still works per-turbine.
-- resume logic clears both wind and temperature auto-stop flags.
+Main features:
+- Checks message signatures before using incoming data.
+- Stores live telemetry for each turbine.
+- Sends commands like yaw, pitch, emergency stop, and resume.
+- Stops turbines automatically if wind or temperature becomes unsafe.
 """
 
 import socket, threading, time, json, logging, sys, os
@@ -23,9 +21,11 @@ from collections import defaultdict, deque
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from security import sign_message, verify_message, strip_security_fields
 
-SATELLITE_HOST = "172.20.10.3"
-SATELLITE_PORT = 9001
-GROUND_ID      = "GROUND-CTRL-01"
+# Use localhost for easy testing on one computer.
+# For two computers, set SATELLITE_HOST to the satellite computer IP address.
+SATELLITE_HOST = os.getenv("SATELLITE_HOST", "127.0.0.1")
+SATELLITE_PORT = int(os.getenv("SATELLITE_GROUND_PORT", "9001"))
+GROUND_ID      = os.getenv("GROUND_ID", "GROUND-CTRL-01")
 
 RECONNECT_DELAY = 5
 HISTORY_LEN     = 100
@@ -79,6 +79,7 @@ def _next_id():
 # ============================================================
 
 def send_to_sat(msg):
+    """Sign a message and send it to the satellite."""
     with _sock_lock:
         if _sat_sock is None:
             log.error("Not connected to satellite")
@@ -93,6 +94,7 @@ def send_to_sat(msg):
 
 
 def send_command(turbine_id, action, params):
+    """Build one command message for one turbine or for ALL turbines."""
     cid = _next_id()
     ok = send_to_sat({
         "type":       "COMMAND",
@@ -123,6 +125,7 @@ def send_all(action, params=None):
 
 
 def discover():
+    """Ask the satellite which turbines are connected."""
     send_to_sat({
         "type":      "DISCOVER",
         "ground_id": GROUND_ID,
@@ -131,6 +134,7 @@ def discover():
 
 
 def ping():
+    """Send a small test message to check the satellite connection."""
     send_to_sat({
         "type":      "PING",
         "ground_id": GROUND_ID,
@@ -143,6 +147,7 @@ def ping():
 # ============================================================
 
 def connect_loop():
+    """Keep trying to connect to the satellite if the link drops."""
     global _sat_sock, connected_to_sat
 
     while True:
@@ -182,6 +187,7 @@ def connect_loop():
 
 
 def _receive_loop(sock):
+    """Read newline-separated JSON messages from the satellite."""
     buffer = ""
     while True:
         try:
@@ -223,6 +229,7 @@ def _receive_loop(sock):
 # ============================================================
 
 def _dispatch(msg):
+    """Send each incoming message type to the right handler."""
     t = msg.get("type", "")
 
     if t == "REGISTER_ACK":
@@ -367,6 +374,7 @@ def _process_farm_alert(msg):
 # ============================================================
 
 def display_status():
+    """Print the latest turbine values in the terminal."""
     print("\n" + "=" * 72)
     print(f"  GROUND CONTROL  -  {datetime.utcnow().strftime('%H:%M:%S')} UTC")
     print(f"  Satellite : {'CONNECTED' if connected_to_sat else 'DISCONNECTED'}")
@@ -409,6 +417,7 @@ def display_status():
 
 
 def show_history(tid, n=5):
+    """Print the last few stored readings for one turbine."""
     with state_lock:
         hist = list(telemetry_history.get(tid, []))[-n:]
 
@@ -452,6 +461,7 @@ HELP = """
 
 
 def cli():
+    """Simple command-line menu for the operator."""
     time.sleep(2)
     print("\nGround Control ready. Type 'help'.\n")
 

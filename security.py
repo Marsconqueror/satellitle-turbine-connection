@@ -12,6 +12,7 @@ Sits in the project root, imported by all three nodes.
 
 import hmac, hashlib, json, time
 
+# Shared secret for this demo. All three programs must use the same value.
 HMAC_SECRET   = b"csu33d03-group9-arklow-2026"
 HMAC_FIELD    = "sig"
 REPLAY_WINDOW = 30   # seconds - reject messages older than this

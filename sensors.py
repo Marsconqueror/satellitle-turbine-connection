@@ -64,6 +64,7 @@ SENSOR_UNITS = {
 }
 
 def _next_shared_wind():
+    """Move the shared wind value slowly so readings do not jump too much."""
     global _shared_wind
     with _shared_wind_lock:
         _shared_wind += random.uniform(-0.4, 0.4)
@@ -124,6 +125,7 @@ class SensorSuite:
         self._seq = 0
 
     def _farm_wind(self) -> float:
+        """Create a smooth wind value for the simulated farm."""
         t_bucket = int(datetime.utcnow().timestamp() / 2)
         base = 15.0 + 2.0 * math.sin(t_bucket / 12.0) + 0.6 * math.sin(t_bucket / 5.0)
         return round(max(4.0, min(25.0, base)), 2)
@@ -179,6 +181,7 @@ class SensorSuite:
         }
 
     def _next_dataset_row(self) -> dict:
+        """Return the next row from the JSON dataset."""
         row = self._dataset[self._index]
         self._index = (self._index + 1) % len(self._dataset)
         return row

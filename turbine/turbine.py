@@ -7,13 +7,11 @@ This script simulates an offshore wind turbine. One turbine acts as the LEADER
 the satellite. Other turbines act as followers but still expose their own sensors
 and can receive commands individually.
 
-Key fixes:
-- Telemetry is now sent as FLAT per-turbine messages (one per turbine per cycle)
-  so the satellite/ground never have to unpack a nested self/relay_data structure.
-- Leader also sends a FARM_ALERT if wind speed exceeds the safety threshold,
-  which tells the ground station to e-stop all turbines.
-- ALL_TURBINES is derived from a comma-separated env var or argv so it scales
-  beyond the hardcoded three.
+Main features:
+- Sends telemetry to the satellite.
+- Receives yaw, pitch, stop, and resume commands.
+- Elects one turbine as the leader using simulated link quality.
+- Sends a farm alert when wind becomes unsafe.
 """
 
 import socket, threading, time, random, json, logging, sys, os
@@ -26,8 +24,10 @@ from sensors import SensorSuite
 # =========================================================
 # NETWORK SETTINGS
 # =========================================================
-SATELLITE_HOST = "127.0.0.1"
-SATELLITE_PORT = 9000
+# Use localhost for running everything on one computer.
+# For a real network test, set SATELLITE_HOST to the satellite computer IP.
+SATELLITE_HOST = os.getenv("SATELLITE_HOST", "127.0.0.1")
+SATELLITE_PORT = int(os.getenv("SATELLITE_TURBINE_PORT", "9000"))
 
 RECONNECT_DELAY  = 5
 SENSOR_INTERVAL  = 2
@@ -80,9 +80,11 @@ SIMULATED_LINK_QUALITY = {
 }
 
 def compute_leader_score(delay_ms, loss_pct):
+    """Higher score means a better turbine to act as leader."""
     return round(1000 - (delay_ms * 2) - (loss_pct * 100), 2)
 
 def elect_leader():
+    """Pick the turbine with the best simulated link quality."""
     best_tid   = None
     best_score = -999999
     for tid in ALL_TURBINES:
@@ -151,13 +153,16 @@ _wind_alert_lock = threading.Lock()
 # SENSOR READERS
 # =========================================================
 def read_wind_speed():
+    """Return a simple wind speed value for the small sensor server."""
     return round(12.0 + random.gauss(0, 2.5), 2)
 
 def read_power_output():
+    """Estimate power from the current wind speed."""
     ws = read_wind_speed()
     return round(min(2000.0, max(0.0, 0.5 * 1.225 * 3.14159 * (40**2) * (ws**3) / 1000)), 1)
 
 def read_rotor_rpm():
+    """Return rotor speed, or zero when emergency stop is active."""
     with state_lock:
         pitch = state["blade_pitch"]
         estop = state["emergency_stop"]
@@ -166,6 +171,7 @@ def read_rotor_rpm():
     return max(0.0, round(15.0 - pitch * 0.1 + random.gauss(0, 0.5), 2))
 
 def read_temperature():
+    """Return a simple generator temperature value."""
     return round(35.0 + random.gauss(0, 3.0), 1)
 
 READERS = {
@@ -179,6 +185,7 @@ READERS = {
 # SENSOR TCP SERVERS  (individual sensor ports)
 # =========================================================
 def sensor_server(name, port):
+    """Start a tiny TCP server for one sensor value."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("0.0.0.0", port))
@@ -193,6 +200,7 @@ def sensor_server(name, port):
                 time.sleep(1)
 
 def _handle_sensor(conn, name):
+    """Reply to a READ request from a sensor client."""
     with conn:
         try:
             req = conn.recv(64).decode().strip()
@@ -302,6 +310,7 @@ def _apply_state_change(action, params, s):
 
 
 def apply_command(cmd):
+    """Run a command received from the ground station."""
     action  = cmd.get("action", "")
     params  = cmd.get("params", {})
     target  = cmd.get("turbine_id", TURBINE_ID)
@@ -343,6 +352,7 @@ def apply_command(cmd):
 # SATELLITE LINK
 # =========================================================
 def satellite_link():
+    """Connect to the satellite and exchange telemetry and commands."""
     global _wind_alert_sent
 
     while True:
