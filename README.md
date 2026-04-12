@@ -15,6 +15,23 @@ The project can run locally on one computer. By default, the turbine and ground 
 - Python 3
 - No extra Python packages are needed
 
+## One-Click Demo Launch
+
+For grading or demo use on Windows, run:
+
+```bat
+launch_demo.bat
+```
+
+This starts the satellite relay, three turbine nodes, and the ground station in separate command windows. In the Ground Station window, type:
+
+```text
+help
+discover
+status
+ping
+```
+
 ## How To Run Locally
 
 Open three terminals from the project folder.

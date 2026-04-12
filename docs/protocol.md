@@ -48,6 +48,14 @@ So the simple idea is:
 - TCP is used for important messages after the devices are connected.
 - UDP is used for quick discovery messages.
 
+## Possible Improvement For Satellite Control
+
+For a real satellite turbine control system, UDP with extra safety and control layers could be a better choice than relying mainly on TCP. Satellite links can have high delay, changing signal quality, and short connection gaps. In those conditions, TCP can sometimes slow the system down because it waits for acknowledgements and may resend old packets before newer data is handled.
+
+UDP is lighter and can send the newest command or sensor update more quickly. It would not be safe to use plain UDP by itself, but it could be improved by adding layers on top, such as message sequence numbers, timestamps, HMAC signatures, encryption, error checking, command acknowledgements only where needed, and rules for rejecting old or unsafe commands. This would give the system more control over reliability instead of letting TCP decide everything.
+
+Using more than one satellite would also improve the design. Multiple satellites could give wider coverage, reduce the chance of losing contact, and allow the system to switch to another satellite if one link becomes weak or unavailable. This would make the turbine control network more resilient, especially in remote areas where a single satellite connection may not always be stable.
+
 ## Message Types
 
 `REGISTER`
